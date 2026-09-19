@@ -244,6 +244,7 @@
             android:id="@+id/btn_logout"
             style="@style/AppButton.Outlined"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/logout"
             android:textColor="@color/error"
             app:strokeColor="@color/error" />
