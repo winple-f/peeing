@@ -1,5 +1,6 @@
 <view class="container">
   <view class="header">
+    <image class="header-logo" src="/assets/icon.png" mode="aspectFit"></image>
     <view class="patient-info">
       <text class="patient-id">编号：{{patientId}}</text>
       <text class="today-date">{{todayDate}}</text>

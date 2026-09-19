@@ -1,8 +1,6 @@
 <view class="container">
   <view class="logo-area">
-    <view class="logo-icon">
-      <text class="logo-text">八髎</text>
-    </view>
+    <image class="logo" src="/assets/icon.png" mode="aspectFit"></image>
     <text class="app-name">尿了吗alpha</text>
     <text class="app-desc">前列腺术后康复助手</text>
   </view>
