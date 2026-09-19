@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large">
+
+        <!-- 顶部欢迎区域 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacing_large">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcome"
+                    android:textSize="@dimen/text_size_xlarge"
+                    android:textColor="@color/text_primary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_patient_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="编号：---"
+                    android:textSize="@dimen/text_size_normal"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="@dimen/spacing_xsmall" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 今日统计卡片 -->
+        <androidx.cardview.widget.CardView
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_large"
+            app:cardBackgroundColor="@color/primary">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_large">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/today_record"
+                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/text_white" />
+
+                <TextView
+                    android:id="@+id/tv_today_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 次"
+                    android:textSize="@dimen/text_size_title"
+                    android:textColor="@color/text_white"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/spacing_small" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 功能入口网格 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_normal">
+
+            <!-- 快速记录 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_quick_record"
+                style="@style/AppCard"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_normal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_xlarge"
+                        android:layout_height="@dimen/icon_size_xlarge"
+                        android:src="@android:drawable/ic_menu_add"
+                        android:tint="@color/primary"
+                        android:contentDescription="记录" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quick_record"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/spacing_normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 填写量表 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_survey"
+                style="@style/AppCard"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_normal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_xlarge"
+                        android:layout_height="@dimen/icon_size_xlarge"
+                        android:src="@android:drawable/ic_menu_edit"
+                        android:tint="@color/accent"
+                        android:contentDescription="量表" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fill_survey"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/spacing_normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_xlarge">
+
+            <!-- 查看记录 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_history"
+                style="@style/AppCard"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_normal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_xlarge"
+                        android:layout_height="@dimen/icon_size_xlarge"
+                        android:src="@android:drawable/ic_menu_agenda"
+                        android:tint="@color/success"
+                        android:contentDescription="历史" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_history"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/spacing_normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 导出数据 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_export"
+                style="@style/AppCard"
+                android:layout_width="0dp"
+                android:layout_height="140dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_normal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_xlarge"
+                        android:layout_height="@dimen/icon_size_xlarge"
+                        android:src="@android:drawable/ic_menu_share"
+                        android:tint="@color/primary_dark"
+                        android:contentDescription="导出" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/export_data"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/spacing_normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- 退出登录按钮 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout"
+            style="@style/AppButton.Outlined"
+            android:layout_width="match_parent"
+            android:text="@string/logout"
+            android:textColor="@color/error"
+            app:strokeColor="@color/error" />
+    </LinearLayout>
+</ScrollView>

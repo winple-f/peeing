@@ -1,0 +1,1094 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large">
+
+        <!-- 步骤：选择时间点 -->
+        <LinearLayout
+            android:id="@+id/step_timepoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time_point"
+                android:textSize="@dimen/text_size_xxlarge"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_large" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择您当前的随访时间点"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="@dimen/spacing_large" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/timepoint_t0"
+                style="@style/AppCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:strokeColor="@color/primary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_point_t0"
+                        android:textSize="@dimen/text_size_xlarge"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="开始治疗前的基础评估"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="@dimen/spacing_xsmall" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/timepoint_t1"
+                style="@style/AppCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:strokeColor="@color/primary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_point_t1"
+                        android:textSize="@dimen/text_size_xlarge"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="治疗结束1个月后"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="@dimen/spacing_xsmall" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/timepoint_t2"
+                style="@style/AppCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:strokeColor="@color/primary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_point_t2"
+                        android:textSize="@dimen/text_size_xlarge"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="治疗结束3个月后"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="@dimen/spacing_xsmall" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/timepoint_t3"
+                style="@style/AppCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:strokeColor="@color/primary">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_point_t3"
+                        android:textSize="@dimen/text_size_xlarge"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="治疗结束6个月后"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="@dimen/spacing_xsmall" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- 步骤：ICIQ-SF 尿失禁问卷 -->
+        <LinearLayout
+            android:id="@+id/step_iciq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/iciq_title"
+                android:textSize="@dimen/text_size_xxlarge"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_large" />
+
+            <!-- 问题1 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. 您多久会漏一次尿？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_iciq_q1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="从不漏尿"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="大约每周1次或更少"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="每周2~3次"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="每天1次"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="每天好几次"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="一直漏尿"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+
+            <!-- 问题2 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. 每次漏尿的量大概有多少？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_iciq_q2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="不漏尿"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="少量（几滴）"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="中等量（内裤湿一片）"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="大量（全湿了）"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+
+            <!-- 问题3 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. 漏尿对您的日常生活影响有多大？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_iciq_q3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0分 - 完全没影响"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2分 - 有一点影响"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4分 - 有些影响"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="6分 - 影响中等"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="8分 - 影响比较大"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10分 - 严重影响生活"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- 步骤：IPSS 前列腺症状评分 -->
+        <LinearLayout
+            android:id="@+id/step_ipss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ipss_title"
+                android:textSize="@dimen/text_size_xxlarge"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_small" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请回忆过去1个月的情况，选择最符合的答案"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="@dimen/spacing_large" />
+
+            <!-- 问题1 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. 排完尿后，是否经常感觉没有排干净？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_ipss_q1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="无"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="很少"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="少半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="约半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="多半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="总是"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+
+            <!-- 问题2 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. 两次排尿间隔是否经常不到2小时？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_ipss_q2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="无"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="很少"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="少半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="约半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="多半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="总是"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+
+            <!-- 问题3 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. 排尿时是否有断断续续的情况？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_ipss_q3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="无"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="很少"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="少半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="约半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="多半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="总是"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+
+            <!-- 问题4 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4. 有尿意时是否憋不住，需要马上去厕所？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_ipss_q4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="无"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="很少"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="少半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="约半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="多半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="总是"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+
+            <!-- 问题5 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5. 尿线是否变细了？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_ipss_q5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="无"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="很少"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="少半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="约半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="多半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="总是"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+
+            <!-- 问题6 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6. 排尿时是否需要用力才能开始？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_ipss_q6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="无"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="很少"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="少半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="约半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="多半"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="总是"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+
+            <!-- 问题7 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7. 晚上睡觉后，一般要起来尿几次？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_normal" />
+
+            <RadioGroup
+                android:id="@+id/rg_ipss_q7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_large">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0次"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1次"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2次"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="3次"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="4次"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="≥5次"
+                    android:textSize="@dimen/text_size_normal"
+                    android:paddingVertical="@dimen/spacing_small" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- 步骤：QoL 生活质量 -->
+        <LinearLayout
+            android:id="@+id/step_qol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/qol_title"
+                android:textSize="@dimen/text_size_xxlarge"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_large" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="如果您以后的生活中，一直伴有现在的排尿情况，您觉得怎么样？"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_primary"
+                android:lineSpacingExtra="8dp"
+                android:layout_marginBottom="@dimen/spacing_large" />
+
+            <RadioGroup
+                android:id="@+id/rg_qol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="非常高兴"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="满意"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="大致满意"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="还可以"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="不太满意"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="苦恼"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal" />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="很糟糕"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- 步骤：结果展示 -->
+        <LinearLayout
+            android:id="@+id/step_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/your_score"
+                android:textSize="@dimen/text_size_xxlarge"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/spacing_large" />
+
+            <!-- ICIQ-SF -->
+            <androidx.cardview.widget.CardView
+                style="@style/AppCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="尿失禁评分（ICIQ-SF）"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_iciq_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 分"
+                        android:textSize="@dimen/text_size_title"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/spacing_small" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- IPSS -->
+            <androidx.cardview.widget.CardView
+                style="@style/AppCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="前列腺症状评分（IPSS）"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_ipss_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 分"
+                        android:textSize="@dimen/text_size_title"
+                        android:textColor="@color/accent"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/spacing_small" />
+
+                    <TextView
+                        android:id="@+id/tv_ipss_severity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="症状程度：轻度"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="@dimen/spacing_xsmall" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- QoL -->
+            <androidx.cardview.widget.CardView
+                style="@style/AppCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_xlarge">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="生活质量评分（QoL）"
+                        android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_qol_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 分"
+                        android:textSize="@dimen/text_size_title"
+                        android:textColor="@color/success"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/spacing_small" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="感谢您的配合！数据已保存。"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/text_secondary"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/spacing_large" />
+        </LinearLayout>
+
+        <!-- 底部按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_normal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_prev"
+                style="@style/AppButton.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height_large"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:text="@string/back"
+                android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_next"
+                style="@style/AppButton.Large"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:text="@string/next" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

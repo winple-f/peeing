@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_title"
+            android:textSize="@dimen/text_size_xxlarge"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/spacing_xlarge" />
+
+        <!-- 用户名 -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/AppTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:layout_marginBottom="@dimen/spacing_normal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textSize="@dimen/text_size_large"
+                android:paddingVertical="@dimen/spacing_normal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- 昵称 -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/AppTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nickname"
+            android:layout_marginBottom="@dimen/spacing_normal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textSize="@dimen/text_size_large"
+                android:paddingVertical="@dimen/spacing_normal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- 密码 -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/AppTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            app:passwordToggleEnabled="true"
+            android:layout_marginBottom="@dimen/spacing_normal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="@dimen/text_size_large"
+                android:paddingVertical="@dimen/spacing_normal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- 确认密码 -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/AppTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirm_password"
+            app:passwordToggleEnabled="true"
+            android:layout_marginBottom="@dimen/spacing_large">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="@dimen/text_size_large"
+                android:paddingVertical="@dimen/spacing_normal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register"
+            style="@style/AppButton.Large"
+            android:layout_width="match_parent"
+            android:text="@string/register" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/spacing_large">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/has_account"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="@color/primary"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/spacing_xsmall" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

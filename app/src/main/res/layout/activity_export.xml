@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_export_range"
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/spacing_large" />
+
+        <androidx.cardview.widget.CardView
+            style="@style/AppCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_xlarge">
+
+            <RadioGroup
+                android:id="@+id/range_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_normal">
+
+                <RadioButton
+                    android:id="@+id/range_all"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/export_all"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/range_30"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/export_recent_30"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal" />
+
+                <RadioButton
+                    android:id="@+id/range_90"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/export_recent_90"
+                    android:textSize="@dimen/text_size_large"
+                    android:paddingVertical="@dimen/spacing_normal" />
+            </RadioGroup>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_export"
+            style="@style/AppButton.Large"
+            android:layout_width="match_parent"
+            android:text="@string/export_excel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="导出的文件会保存在手机的文档文件夹中，您可以通过微信等方式发送给医生。"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:lineSpacingExtra="4dp" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">前列腺术后康复助手</string>
+
+    <!-- 通用 -->
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="back">返回</string>
+    <string name="next">下一步</string>
+    <string name="submit">提交</string>
+
+    <!-- 登录注册 -->
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="username">用户名/手机号</string>
+    <string name="password">密码</string>
+    <string name="nickname">昵称</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="login_title">欢迎使用</string>
+    <string name="register_title">注册新账号</string>
+    <string name="no_account">还没有账号？</string>
+    <string name="has_account">已有账号？</string>
+    <string name="register_success">注册成功！</string>
+    <string name="login_failed">用户名或密码错误</string>
+    <string name="username_exists">该用户名已被注册</string>
+    <string name="password_not_match">两次输入的密码不一致</string>
+    <string name="please_enter_username">请输入用户名</string>
+    <string name="please_enter_password">请输入密码</string>
+    <string name="please_enter_nickname">请输入昵称</string>
+    <string name="patient_number">患者编号</string>
+
+    <!-- 主页 -->
+    <string name="home">首页</string>
+    <string name="record">记录</string>
+    <string name="history">历史</string>
+    <string name="mine">我的</string>
+    <string name="welcome">您好，%s</string>
+    <string name="today_record">今日排尿</string>
+    <string name="today_count">%d 次</string>
+    <string name="quick_record">快速记录</string>
+    <string name="fill_survey">填写量表</string>
+    <string name="view_history">查看记录</string>
+    <string name="export_data">导出数据</string>
+
+    <!-- 排尿记录 -->
+    <string name="add_record">添加排尿记录</string>
+    <string name="record_time">记录时间</string>
+    <string name="urine_volume">尿量</string>
+    <string name="volume_low">少量</string>
+    <string name="volume_medium">中量</string>
+    <string name="volume_high">大量</string>
+    <string name="symptoms">症状</string>
+    <string name="has_leakage">有漏尿</string>
+    <string name="has_urgency">有尿急</string>
+    <string name="has_pain">有尿痛</string>
+    <string name="has_weak_stream">尿线变细</string>
+    <string name="has_intermittent">间断排尿</string>
+    <string name="is_nocturia">夜间排尿</string>
+    <string name="note">备注</string>
+    <string name="record_saved">记录已保存</string>
+    <string name="record_deleted">记录已删除</string>
+    <string name="confirm_delete">确定要删除这条记录吗？</string>
+
+    <!-- 量表 -->
+    <string name="survey_title">随访问卷</string>
+    <string name="time_point">随访时间点</string>
+    <string name="time_point_t0">基线评估</string>
+    <string name="time_point_t1">疗程后1个月</string>
+    <string name="time_point_t2">疗程后3个月</string>
+    <string name="time_point_t3">疗程后6个月</string>
+    <string name="iciq_title">尿失禁情况（ICIQ-SF）</string>
+    <string name="ipss_title">排尿症状（IPSS）</string>
+    <string name="qol_title">生活质量（QoL）</string>
+    <string name="survey_submitted">问卷已提交</string>
+    <string name="your_score">您的评分</string>
+    <string name="total_score">总分：%d 分</string>
+
+    <!-- 提醒 -->
+    <string name="reminder_title">随访提醒</string>
+    <string name="reminder_content">您好，到了随访时间啦，请填写随访问卷，谢谢配合！</string>
+
+    <!-- 导出 -->
+    <string name="export_title">数据导出</string>
+    <string name="export_excel">导出为Excel文件</string>
+    <string name="export_success">导出成功！文件已保存到：%s</string>
+    <string name="export_failed">导出失败</string>
+    <string name="select_export_range">选择导出范围</string>
+    <string name="export_all">全部数据</string>
+    <string name="export_recent_30">最近30天</string>
+    <string name="export_recent_90">最近90天</string>
+
+    <!-- 历史 -->
+    <string name="history_title">历史记录</string>
+    <string name="tab_urination">排尿记录</string>
+    <string name="tab_survey">量表评估</string>
+    <string name="no_records">暂无记录</string>
+
+    <!-- 我的 -->
+    <string name="my_info">个人信息</string>
+    <string name="logout">退出登录</string>
+    <string name="confirm_logout">确定要退出登录吗？</string>
+    <string name="about">关于</string>
+    <string name="version">版本 %s</string>
+</resources>
