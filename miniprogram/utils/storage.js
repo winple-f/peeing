@@ -1,4 +1,4 @@
-﻿const STORAGE_KEYS = {
+const STORAGE_KEYS = {
   URINATION_RECORDS: 'urination_records',
   SURVEY_RECORDS: 'survey_records',
   USER_INFO: 'userInfo',

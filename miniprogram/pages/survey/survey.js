@@ -1,4 +1,4 @@
-﻿const app = getApp()
+const app = getApp()
 const storage = require('../../utils/storage.js')
 
 Page({
