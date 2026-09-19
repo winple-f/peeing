@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/login/login",
+    "pages/register/register",
     "pages/index/index",
     "pages/record/record",
     "pages/survey/survey",
@@ -13,27 +14,7 @@
     "navigationBarBackgroundColor": "#2196F3",
     "navigationBarTitleText": "尿了吗alpha",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#F5F5F5"
-  },
-  "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#2196F3",
-    "backgroundColor": "#FFFFFF",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/chart/chart",
-        "text": "统计"
-      },
-      {
-        "pagePath": "pages/history/history",
-        "text": "记录"
-      }
-    ]
+    "backgroundColor": "#F5F7FA"
   },
   "permission": {
     "scope.userInfo": {

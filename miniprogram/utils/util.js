@@ -8,6 +8,10 @@ const formatTime = (timestamp) => {
   return `${year}年${month}月${day}日 ${hour}:${minute}`
 }
 
+const formatDateTime = (timestamp) => {
+  return formatTime(timestamp)
+}
+
 const formatDate = (timestamp) => {
   const date = new Date(timestamp)
   const year = date.getFullYear()
@@ -45,6 +49,7 @@ const escapeCsv = (text) => {
 
 module.exports = {
   formatTime,
+  formatDateTime,
   formatDate,
   formatDateShort,
   getDayStart,

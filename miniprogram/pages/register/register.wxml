@@ -1,0 +1,23 @@
+<view class="container">
+  <text class="page-title">注册新账号</text>
+
+  <view class="input-group">
+    <input class="text-input" placeholder="用户名/手机号" value="{{username}}" bindinput="onUsernameInput" />
+  </view>
+  <view class="input-group">
+    <input class="text-input" placeholder="昵称" value="{{nickname}}" bindinput="onNicknameInput" />
+  </view>
+  <view class="input-group">
+    <input class="text-input" placeholder="密码" password="{{true}}" value="{{password}}" bindinput="onPasswordInput" />
+  </view>
+  <view class="input-group">
+    <input class="text-input" placeholder="确认密码" password="{{true}}" value="{{confirmPassword}}" bindinput="onConfirmPasswordInput" />
+  </view>
+
+  <button class="btn-register" bindtap="handleRegister">注册</button>
+
+  <view class="login-row">
+    <text class="has-account">已有账号？</text>
+    <text class="login-link" bindtap="goLogin">登录</text>
+  </view>
+</view>

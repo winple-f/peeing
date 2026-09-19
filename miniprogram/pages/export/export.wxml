@@ -1,49 +1,24 @@
 <view class="container">
-  <view class="summary-card">
-    <view class="summary-title">数据概况</view>
-    <view class="summary-row">
-      <text class="summary-label">患者编号</text>
-      <text class="summary-value">{{patientId}}</text>
-    </view>
-    <view class="summary-row">
-      <text class="summary-label">排尿记录</text>
-      <text class="summary-value">{{recordCount}}条</text>
-    </view>
-    <view class="summary-row">
-      <text class="summary-label">量表记录</text>
-      <text class="summary-value">{{surveyCount}}条</text>
-    </view>
-    <view class="summary-row">
-      <text class="summary-label">记录时间</text>
-      <text class="summary-value">{{dateRange}}</text>
-    </view>
+  <text class="page-title">选择导出范围</text>
+
+  <view class="card">
+    <radio-group bindchange="onRangeChange">
+      <label class="radio-item">
+        <radio value="0" checked="{{exportRange === 0}}" />
+        <text>全部数据</text>
+      </label>
+      <label class="radio-item">
+        <radio value="1" checked="{{exportRange === 1}}" />
+        <text>最近30天</text>
+      </label>
+      <label class="radio-item">
+        <radio value="2" checked="{{exportRange === 2}}" />
+        <text>最近90天</text>
+      </label>
+    </radio-group>
   </view>
 
-  <view class="export-section">
-    <view class="section-title">导出内容选择</view>
-    <view class="checkbox-row" bindtap="toggleExportType" data-type="urination">
-      <view class="checkbox {{exportTypes.urination ? 'checked' : ''}}">
-        <text wx:if="{{exportTypes.urination}}" class="check-mark">✓</text>
-      </view>
-      <text class="checkbox-label">排尿记录（时间、尿量、症状、评分）</text>
-    </view>
-    <view class="checkbox-row" bindtap="toggleExportType" data-type="survey">
-      <view class="checkbox {{exportTypes.survey ? 'checked' : ''}}">
-        <text wx:if="{{exportTypes.survey}}" class="check-mark">✓</text>
-      </view>
-      <text class="checkbox-label">量表记录（ICIQ-SF/IPSS/QoL评分）</text>
-    </view>
-  </view>
+  <button class="btn-export" bindtap="handleExport">导出为Excel文件</button>
 
-  <view class="preview-section" wx:if="{{csvPreview}}">
-    <view class="section-title">数据预览</view>
-    <scroll-view scroll-x class="preview-scroll">
-      <view class="preview-content">
-        <text class="preview-text">{{csvPreview}}</text>
-      </view>
-    </scroll-view>
-  </view>
-
-  <button class="btn-generate" bindtap="generateCSV">生成数据文件</button>
-  <button class="btn-copy" wx:if="{{csvContent}}" bindtap="copyToClipboard">复制到剪贴板</button>
+  <text class="export-hint">导出的文件会保存在手机的文档文件夹中，您可以通过微信等方式发送给医生。</text>
 </view>

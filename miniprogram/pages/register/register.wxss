@@ -6,34 +6,11 @@
   background: #F5F7FA;
 }
 
-.logo-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 60rpx;
-  margin-top: 40rpx;
-}
-
-.logo {
-  width: 160rpx;
-  height: 160rpx;
-  margin-bottom: 24rpx;
-}
-
-.login-title {
+.page-title {
   font-size: 48rpx;
   font-weight: bold;
   color: #212121;
-  margin-bottom: 8rpx;
-}
-
-.app-name {
-  font-size: 32rpx;
-  color: #757575;
-}
-
-.form-area {
-  width: 100%;
+  margin-bottom: 48rpx;
 }
 
 .input-group {
@@ -51,7 +28,7 @@
   border: 2rpx solid #E0E0E0;
 }
 
-.btn-login {
+.btn-register {
   width: 100%;
   background: #2196F3;
   color: #FFFFFF;
@@ -63,18 +40,18 @@
   margin-bottom: 32rpx;
 }
 
-.register-row {
+.login-row {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.no-account {
+.has-account {
   font-size: 30rpx;
   color: #757575;
 }
 
-.register-link {
+.login-link {
   font-size: 30rpx;
   color: #2196F3;
   font-weight: bold;

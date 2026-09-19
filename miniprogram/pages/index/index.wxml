@@ -1,57 +1,46 @@
 <view class="container">
   <view class="header">
     <image class="header-logo" src="/assets/icon.png" mode="aspectFit"></image>
-    <view class="patient-info">
-      <text class="patient-id">编号：{{patientId}}</text>
-      <text class="today-date">{{todayDate}}</text>
+    <view class="header-text">
+      <text class="welcome">{{welcomeText}}</text>
+      <text class="patient-number">编号：{{patientId}}</text>
     </view>
   </view>
 
-  <view class="quick-record">
-    <view class="quick-title">快速记录</view>
-    <view class="quick-desc">点击下方按钮，记录这次排尿</view>
-    <button class="btn-success quick-btn" bindtap="goRecord">记一笔排尿</button>
+  <view class="today-card">
+    <text class="today-label">今日排尿</text>
+    <text class="today-count">{{todayCount}} 次</text>
   </view>
 
-  <view class="card-grid">
+  <view class="card-row">
+    <view class="card-item" bindtap="goRecord">
+      <text class="card-icon">+</text>
+      <text class="card-title">快速记录</text>
+    </view>
     <view class="card-item" bindtap="goSurvey">
-      <view class="card-icon" style="background:#E3F2FD">
-        <text class="icon-text" style="color:#2196F3">评</text>
-      </view>
-      <text class="card-title">量表评估</text>
-      <text class="card-desc">填写问卷量表</text>
+      <text class="card-icon">评</text>
+      <text class="card-title">填写量表</text>
     </view>
+  </view>
 
-    <view class="card-item" bindtap="goChart">
-      <view class="card-icon" style="background:#FFF3E0">
-        <text class="icon-text" style="color:#FF9800">图</text>
-      </view>
-      <text class="card-title">数据统计</text>
-      <text class="card-desc">查看图表分析</text>
-    </view>
-
+  <view class="card-row">
     <view class="card-item" bindtap="goHistory">
-      <view class="card-icon" style="background:#E8F5E9">
-        <text class="icon-text" style="color:#4CAF50">史</text>
-      </view>
-      <text class="card-title">历史记录</text>
-      <text class="card-desc">查看往期数据</text>
+      <text class="card-icon">史</text>
+      <text class="card-title">查看记录</text>
     </view>
+    <view class="card-item" bindtap="goChart">
+      <text class="card-icon">图</text>
+      <text class="card-title">数据统计</text>
+    </view>
+  </view>
 
+  <view class="card-row">
     <view class="card-item" bindtap="goExport">
-      <view class="card-icon" style="background:#F3E5F5">
-        <text class="icon-text" style="color:#9C27B0">出</text>
-      </view>
-      <text class="card-title">数据导出</text>
-      <text class="card-desc">导出给医生</text>
+      <text class="card-icon">出</text>
+      <text class="card-title">导出数据</text>
     </view>
+    <view class="card-item-placeholder"></view>
   </view>
 
-  <view class="followup-area" wx:if="{{nextFollowup}}">
-    <view class="followup-title">下次随访提醒</view>
-    <view class="followup-content">
-      <text class="followup-name">{{nextFollowup.name}}</text>
-      <text class="followup-date">{{nextFollowup.date}}</text>
-    </view>
-  </view>
+  <button class="btn-logout" bindtap="handleLogout">退出登录</button>
 </view>

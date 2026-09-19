@@ -15,121 +15,88 @@
   flex-shrink: 0;
 }
 
-.patient-info {
+.header-text {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 }
 
-.patient-id {
-  font-size: 30rpx;
-  color: #2196F3;
-  font-weight: bold;
-}
-
-.today-date {
-  font-size: 28rpx;
-  color: #757575;
-}
-
-.quick-record {
-  background: #FFFFFF;
-  border-radius: 16rpx;
-  padding: 40rpx 32rpx;
-  margin-bottom: 32rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.08);
-  text-align: center;
-}
-
-.quick-title {
+.welcome {
   font-size: 40rpx;
   font-weight: bold;
   color: #212121;
-  margin-bottom: 8rpx;
 }
 
-.quick-desc {
+.patient-number {
   font-size: 30rpx;
   color: #757575;
+  margin-top: 4rpx;
+}
+
+.today-card {
+  background: #2196F3;
+  border-radius: 16rpx;
+  padding: 40rpx 32rpx;
   margin-bottom: 32rpx;
-}
-
-.quick-btn {
-  width: 100%;
-}
-
-.card-grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.today-label {
+  font-size: 34rpx;
+  color: #FFFFFF;
+}
+
+.today-count {
+  font-size: 56rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-top: 8rpx;
+}
+
+.card-row {
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 24rpx;
 }
 
 .card-item {
-  width: 48%;
+  flex: 1;
   background: #FFFFFF;
   border-radius: 16rpx;
   padding: 32rpx 24rpx;
-  margin-bottom: 24rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 240rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.card-item-placeholder {
+  flex: 1;
 }
 
 .card-icon {
-  width: 96rpx;
-  height: 96rpx;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16rpx;
-}
-
-.icon-text {
-  font-size: 40rpx;
+  font-size: 56rpx;
+  color: #2196F3;
   font-weight: bold;
+  margin-bottom: 16rpx;
 }
 
 .card-title {
   font-size: 34rpx;
   font-weight: bold;
   color: #212121;
-  margin-bottom: 4rpx;
 }
 
-.card-desc {
-  font-size: 26rpx;
-  color: #9E9E9E;
-}
-
-.followup-area {
-  background: #E3F2FD;
-  border-radius: 16rpx;
-  padding: 32rpx;
-  margin-top: 16rpx;
-}
-
-.followup-title {
-  font-size: 30rpx;
-  color: #2196F3;
+.btn-logout {
+  width: 100%;
+  background: transparent;
+  color: #F44336;
+  font-size: 36rpx;
   font-weight: bold;
-  margin-bottom: 12rpx;
-}
-
-.followup-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.followup-name {
-  font-size: 34rpx;
-  color: #212121;
-  font-weight: bold;
-}
-
-.followup-date {
-  font-size: 30rpx;
-  color: #757575;
+  border: 2rpx solid #F44336;
+  border-radius: 12rpx;
+  line-height: 1.5;
+  margin-top: 32rpx;
 }

@@ -3,6 +3,7 @@ const STORAGE_KEYS = {
   SURVEY_RECORDS: 'survey_records',
   USER_INFO: 'userInfo',
   PATIENT_ID: 'patientId',
+  USER_ID: 'userId',
   REGISTER_DATE: 'registerDate'
 }
 
@@ -56,6 +57,14 @@ function getDailyCount(date) {
   return getUrinationRecordsByDateRange(start.getTime(), end.getTime()).length
 }
 
+function getTodayCount() {
+  const now = new Date()
+  now.setHours(0, 0, 0, 0)
+  const start = now.getTime()
+  const end = start + 24 * 60 * 60 * 1000
+  return getUrinationRecordsByDateRange(start, end).length
+}
+
 function addSurveyRecord(record) {
   const records = getRecords(STORAGE_KEYS.SURVEY_RECORDS)
   record.id = Date.now()
@@ -73,6 +82,14 @@ function getAllUrinationRecords() {
   return getRecords(STORAGE_KEYS.URINATION_RECORDS)
 }
 
+function getUrinationRecordsByRange(range) {
+  const records = getAllUrinationRecords()
+  if (range === 0) return records
+  const days = range === 1 ? 30 : 90
+  const startTime = Date.now() - days * 24 * 60 * 60 * 1000
+  return records.filter(r => r.recordTime >= startTime)
+}
+
 module.exports = {
   STORAGE_KEYS,
   addUrinationRecord,
@@ -81,7 +98,9 @@ module.exports = {
   getUrinationRecordById,
   getUrinationRecordsByDateRange,
   getDailyCount,
+  getTodayCount,
   addSurveyRecord,
   getSurveyRecords,
-  getAllUrinationRecords
+  getAllUrinationRecords,
+  getUrinationRecordsByRange
 }

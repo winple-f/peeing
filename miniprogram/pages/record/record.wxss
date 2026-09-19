@@ -1,151 +1,161 @@
 .container {
   padding: 32rpx;
-  padding-bottom: 160rpx;
-}
-
-.section {
-  background: #FFFFFF;
-  border-radius: 16rpx;
-  padding: 32rpx;
-  margin-bottom: 24rpx;
-  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
 }
 
 .section-title {
   font-size: 34rpx;
   font-weight: bold;
   color: #212121;
-  margin-bottom: 24rpx;
+  margin-bottom: 20rpx;
+  display: block;
 }
 
-.picker-value {
-  font-size: 36rpx;
-  color: #2196F3;
-  padding: 16rpx 0;
-  border-bottom: 2rpx solid #E0E0E0;
-  margin-bottom: 16rpx;
-}
-
-.option-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 16rpx;
-}
-
-.option-item {
-  flex: 1;
+.time-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
   text-align: center;
-  padding: 24rpx 0;
-  font-size: 36rpx;
-  border-radius: 12rpx;
-  background: #F5F5F5;
-  color: #616161;
-  border: 4rpx solid transparent;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
 }
 
-.option-item.active {
-  background: #E8F5E9;
-  color: #4CAF50;
-  border-color: #4CAF50;
+.time-text {
+  font-size: 40rpx;
   font-weight: bold;
+  color: #2196F3;
 }
 
-.symptom-list {
+.volume-row {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.volume-card {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
   display: flex;
   flex-direction: column;
-  gap: 16rpx;
+  align-items: center;
+  border: 4rpx solid transparent;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
+}
+
+.volume-card.selected {
+  border-color: #2196F3;
+  background: #E3F2FD;
+}
+
+.volume-icon {
+  font-size: 48rpx;
+  color: #2196F3;
+  margin-bottom: 8rpx;
+}
+
+.volume-text {
+  font-size: 34rpx;
+  color: #212121;
+}
+
+.symptoms-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
 }
 
 .symptom-item {
-  border-bottom: 2rpx solid #F0F0F0;
-  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #E0E0E0;
 }
 
 .symptom-item:last-child {
   border-bottom: none;
-  padding-bottom: 0;
 }
 
 .symptom-header {
   display: flex;
   align-items: center;
-  gap: 16rpx;
+  padding: 20rpx 0;
 }
 
 .checkbox {
-  width: 48rpx;
-  height: 48rpx;
+  width: 40rpx;
+  height: 40rpx;
   border: 4rpx solid #BDBDBD;
   border-radius: 8rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
 }
 
 .checkbox.checked {
-  background: #4CAF50;
-  border-color: #4CAF50;
+  background: #2196F3;
+  border-color: #2196F3;
 }
 
-.check-mark {
-  color: #FFFFFF;
-  font-size: 32rpx;
-  font-weight: bold;
-}
-
-.symptom-name {
+.symptom-label {
   font-size: 36rpx;
   color: #212121;
 }
 
-.score-slider {
-  margin-top: 16rpx;
-  padding-left: 64rpx;
-  padding-right: 16rpx;
+.slider-area {
+  padding-left: 60rpx;
+  padding-bottom: 16rpx;
 }
 
-.score-labels {
-  display: flex;
-  justify-content: space-between;
+.slider-label {
+  font-size: 28rpx;
+  color: #757575;
   margin-bottom: 8rpx;
 }
 
-.score-label-left,
-.score-label-right {
+.slider-row {
+  display: flex;
+  align-items: center;
+}
+
+.slider-bound {
   font-size: 28rpx;
-  color: #9E9E9E;
+  color: #757575;
+  width: 30rpx;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.severity-slider {
+  flex: 1;
+  margin: 0 16rpx;
 }
 
 .score-display {
-  text-align: center;
-  font-size: 32rpx;
-  color: #4CAF50;
+  font-size: 28rpx;
+  color: #2196F3;
   font-weight: bold;
-  margin-top: 8rpx;
+  width: 60rpx;
+  flex-shrink: 0;
 }
 
-.textarea {
+.note-input {
   width: 100%;
-  min-height: 120rpx;
-  font-size: 32rpx;
-  padding: 16rpx;
+  min-height: 160rpx;
+  font-size: 36rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
   box-sizing: border-box;
   border: 2rpx solid #E0E0E0;
-  border-radius: 12rpx;
+  margin-bottom: 32rpx;
 }
 
 .btn-save {
-  position: fixed;
-  bottom: 32rpx;
-  left: 32rpx;
-  right: 32rpx;
-  background: #4CAF50;
+  width: 100%;
+  background: #2196F3;
   color: #FFFFFF;
-  font-size: 40rpx;
+  font-size: 38rpx;
   font-weight: bold;
   border-radius: 12rpx;
-  padding: 24rpx 0;
-  text-align: center;
   border: none;
   line-height: 1.5;
 }

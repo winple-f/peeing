@@ -4,96 +4,106 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    patientId: '',
-    recordCount: 0,
-    surveyCount: 0,
-    dateRange: '',
-    exportTypes: { urination: true, survey: true },
-    csvContent: '',
-    csvPreview: ''
+    exportRange: 0
   },
 
   onLoad() {
+    if (!app.checkLogin()) return
+  },
+
+  onRangeChange(e) {
+    this.setData({ exportRange: parseInt(e.detail.value) })
+  },
+
+  handleExport() {
+    const range = this.data.exportRange
+    const urinationRecords = storage.getUrinationRecordsByRange(range)
+    const surveyRecords = storage.getSurveyRecords()
+
+    const userInfo = app.globalData.userInfo || {}
     const patientId = app.getPatientId() || ''
-    const records = storage.getAllUrinationRecords()
-    const surveys = storage.getSurveyRecords()
-    let dateRange = '暂无记录'
-    if (records.length > 0) {
-      const times = records.map(r => r.recordTime).sort()
-      dateRange = util.formatDate(times[0]) + ' 至 ' + util.formatDate(times[times.length - 1])
-    }
-    this.setData({
-      patientId,
-      recordCount: records.length,
-      surveyCount: surveys.length,
-      dateRange
+
+    const volumeTexts = ['少量', '中量', '大量']
+    let csv = '\uFEFF'
+
+    csv += '患者信息\n'
+    csv += '患者编号,' + patientId + '\n'
+    csv += '昵称,' + (userInfo.nickname || '') + '\n'
+    csv += '\n'
+
+    csv += '排尿记录\n'
+    csv += '序号,记录时间,尿量,漏尿,漏尿评分,尿急,尿急评分,尿痛,尿痛评分,尿线变细,尿线变细评分,间断排尿,间断排尿评分,夜间排尿,夜间排尿评分,备注\n'
+    urinationRecords.sort((a, b) => a.recordTime - b.recordTime).forEach((r, idx) => {
+      csv += (idx + 1) + ','
+      csv += util.formatDateTime(r.recordTime) + ','
+      csv += (volumeTexts[r.volumeLevel] || '少量') + ','
+      csv += (r.hasLeakage ? '是' : '否') + ','
+      csv += (r.leakageSeverity || '') + ','
+      csv += (r.hasUrgency ? '是' : '否') + ','
+      csv += (r.urgencySeverity || '') + ','
+      csv += (r.hasPain ? '是' : '否') + ','
+      csv += (r.painSeverity || '') + ','
+      csv += (r.hasWeakStream ? '是' : '否') + ','
+      csv += (r.weakStreamSeverity || '') + ','
+      csv += (r.hasIntermittent ? '是' : '否') + ','
+      csv += (r.intermittentSeverity || '') + ','
+      csv += (r.hasNocturia ? '是' : '否') + ','
+      csv += (r.nocturiaSeverity || '') + ','
+      csv += util.escapeCsv(r.note || '') + '\n'
     })
-  },
+    csv += '\n'
 
-  toggleExportType(e) {
-    const type = e.currentTarget.dataset.type
-    const exportTypes = this.data.exportTypes
-    exportTypes[type] = !exportTypes[type]
-    this.setData({ exportTypes })
-  },
-
-  generateCSV() {
-    if (!this.data.exportTypes.urination && !this.data.exportTypes.survey) {
-      wx.showToast({ title: '请至少选择一项', icon: 'none' })
-      return
-    }
-
-    let csv = ''
-    const patientId = this.data.patientId
-
-    if (this.data.exportTypes.urination) {
-      csv += '患者编号,记录时间,尿量,伴随症状,漏尿评分,尿急评分,尿痛评分,尿线变细评分,间断排尿评分,夜间排尿评分,备注\n'
-      const records = storage.getAllUrinationRecords().sort((a, b) => a.recordTime - b.recordTime)
-      records.forEach(r => {
-        const time = util.formatTime(r.recordTime)
-        const volume = util.escapeCsv(r.urineVolume)
-        const symptoms = util.escapeCsv((r.symptoms || []).join('、'))
-        const scores = r.symptomScores || {}
-        const leakScore = scores['漏尿'] || ''
-        const urgeScore = scores['尿急'] || ''
-        const painScore = scores['尿痛'] || ''
-        const thinScore = scores['尿线变细'] || ''
-        const interruptScore = scores['间断排尿'] || ''
-        const nightScore = scores['夜间排尿'] || ''
-        const note = util.escapeCsv(r.note || '')
-        csv += `${patientId},${time},${volume},${symptoms},${leakScore},${urgeScore},${painScore},${thinScore},${interruptScore},${nightScore},${note}\n`
-      })
-      csv += '\n'
-    }
-
-    if (this.data.exportTypes.survey) {
-      csv += '患者编号,评估时间,量表类型,评分,严重程度,备注\n'
-      const typeMap = { 'iciq': 'ICIQ-SF', 'ipss': 'IPSS', 'qol': 'QoL' }
-      const surveys = storage.getSurveyRecords().sort((a, b) => a.createdAt - b.createdAt)
-      surveys.forEach(r => {
-        const time = util.formatTime(r.createdAt)
-        const type = typeMap[r.type] || r.type
-        const score = r.score
-        const label = util.escapeCsv(r.label || '')
-        csv += `${patientId},${time},${type},${score},${label},\n`
-      })
-    }
-
-    const preview = csv.length > 1000 ? csv.substring(0, 1000) + '\n...' : csv
-    this.setData({
-      csvContent: csv,
-      csvPreview: preview
+    csv += '量表评估\n'
+    csv += '时间点,评估日期,ICIQ-Q1,ICIQ-Q2,ICIQ-Q3,ICIQ总分,IPSS-Q1,IPSS-Q2,IPSS-Q3,IPSS-Q4,IPSS-Q5,IPSS-Q6,IPSS-Q7,IPSS总分,QoL评分\n'
+    surveyRecords.sort((a, b) => a.surveyDate - b.surveyDate).forEach(r => {
+      csv += (r.timePoint || '') + ','
+      csv += util.formatDate(r.surveyDate) + ','
+      csv += (r.iciqQ1 !== undefined ? r.iciqQ1 : '') + ','
+      csv += (r.iciqQ2 !== undefined ? r.iciqQ2 : '') + ','
+      csv += (r.iciqQ3 !== undefined ? r.iciqQ3 : '') + ','
+      csv += (r.iciqTotalScore || '') + ','
+      csv += (r.ipssQ1 !== undefined ? r.ipssQ1 : '') + ','
+      csv += (r.ipssQ2 !== undefined ? r.ipssQ2 : '') + ','
+      csv += (r.ipssQ3 !== undefined ? r.ipssQ3 : '') + ','
+      csv += (r.ipssQ4 !== undefined ? r.ipssQ4 : '') + ','
+      csv += (r.ipssQ5 !== undefined ? r.ipssQ5 : '') + ','
+      csv += (r.ipssQ6 !== undefined ? r.ipssQ6 : '') + ','
+      csv += (r.ipssQ7 !== undefined ? r.ipssQ7 : '') + ','
+      csv += (r.ipssTotalScore || '') + ','
+      csv += (r.qolScore !== undefined ? r.qolScore : '') + '\n'
     })
-    wx.showToast({ title: '生成成功', icon: 'success' })
-  },
 
-  copyToClipboard() {
-    if (!this.data.csvContent) return
-    wx.setClipboardData({
-      data: this.data.csvContent,
-      success: () => {
-        wx.showToast({ title: '已复制到剪贴板', icon: 'success' })
+    const fileName = '康复数据_' + patientId + '_' + this.getTimeStr() + '.csv'
+    const fs = wx.getFileSystemManager()
+    const filePath = wx.env.USER_DATA_PATH + '/' + fileName
+    fs.writeFileSync(filePath, csv, 'utf8')
+
+    wx.showModal({
+      title: '导出成功',
+      content: '文件已保存：' + fileName + '\n是否打开分享？',
+      confirmText: '分享',
+      success: (res) => {
+        if (res.confirm) {
+          wx.shareFileMessage({
+            filePath: filePath,
+            success: () => {},
+            fail: () => {
+              wx.showToast({ title: '分享取消', icon: 'none' })
+            }
+          })
+        }
       }
     })
+  },
+
+  getTimeStr() {
+    const d = new Date()
+    const y = d.getFullYear()
+    const m = String(d.getMonth() + 1).padStart(2, '0')
+    const day = String(d.getDate()).padStart(2, '0')
+    const h = String(d.getHours()).padStart(2, '0')
+    const min = String(d.getMinutes()).padStart(2, '0')
+    const s = String(d.getSeconds()).padStart(2, '0')
+    return y + m + day + '_' + h + min + s
   }
 })

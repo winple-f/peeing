@@ -1,31 +1,21 @@
 <view class="container">
   <view class="logo-area">
     <image class="logo" src="/assets/icon.png" mode="aspectFit"></image>
+    <text class="login-title">欢迎使用</text>
     <text class="app-name">尿了吗alpha</text>
-    <text class="app-desc">前列腺术后康复助手</text>
   </view>
 
-  <view class="intro-area">
-    <view class="intro-item">
-      <text class="intro-icon">1</text>
-      <text class="intro-text">记录每次排尿情况</text>
+  <view class="form-area">
+    <view class="input-group">
+      <input class="text-input" placeholder="用户名/手机号" value="{{username}}" bindinput="onUsernameInput" />
     </view>
-    <view class="intro-item">
-      <text class="intro-icon">2</text>
-      <text class="intro-text">定期填写评估量表</text>
+    <view class="input-group">
+      <input class="text-input" placeholder="密码" password="{{true}}" value="{{password}}" bindinput="onPasswordInput" />
     </view>
-    <view class="intro-item">
-      <text class="intro-icon">3</text>
-      <text class="intro-text">查看数据统计图表</text>
+    <button class="btn-login" bindtap="handleLogin">登录</button>
+    <view class="register-row">
+      <text class="no-account">还没有账号？</text>
+      <text class="register-link" bindtap="goRegister">注册</text>
     </view>
-    <view class="intro-item">
-      <text class="intro-icon">4</text>
-      <text class="intro-text">导出数据发给医生</text>
-    </view>
-  </view>
-
-  <view class="btn-area">
-    <button class="btn-primary" bindtap="handleLogin">开始使用</button>
-    <text class="privacy-text">数据仅保存在您的手机本地，不会上传</text>
   </view>
 </view>

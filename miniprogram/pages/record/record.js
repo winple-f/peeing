@@ -4,69 +4,59 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
-    recordDate: '',
     recordTime: '',
-    recordDateText: '',
-    recordTimeText: '',
-    urineVolume: '',
+    recordTimestamp: 0,
+    volumeLevel: 1,
     symptoms: [
-      { name: '漏尿', checked: false, score: 2 },
-      { name: '尿急', checked: false, score: 2 },
-      { name: '尿痛', checked: false, score: 2 },
-      { name: '尿线变细', checked: false, score: 2 },
-      { name: '间断排尿', checked: false, score: 2 },
-      { name: '夜间排尿', checked: false, score: 2 }
+      { key: 'leakage', label: '有漏尿', checked: false, score: 1 },
+      { key: 'urgency', label: '有尿急', checked: false, score: 1 },
+      { key: 'pain', label: '有尿痛', checked: false, score: 1 },
+      { key: 'weakStream', label: '尿线变细', checked: false, score: 1 },
+      { key: 'intermittent', label: '间断排尿', checked: false, score: 1 },
+      { key: 'nocturia', label: '夜间排尿', checked: false, score: 1 }
     ],
     note: ''
   },
 
   onLoad() {
-    const now = new Date()
-    const year = now.getFullYear()
-    const month = String(now.getMonth() + 1).padStart(2, '0')
-    const day = String(now.getDate()).padStart(2, '0')
-    const hour = String(now.getHours()).padStart(2, '0')
-    const minute = String(now.getMinutes()).padStart(2, '0')
-    const dateStr = `${year}-${month}-${day}`
-    const timeStr = `${hour}:${minute}`
+    if (!app.checkLogin()) return
+    const now = Date.now()
     this.setData({
-      recordDate: dateStr,
-      recordTime: timeStr,
-      recordDateText: `${year}年${month}月${day}日`,
-      recordTimeText: `${hour}:${minute}`
+      recordTime: util.formatDateTime(now),
+      recordTimestamp: now
     })
   },
 
-  onDateChange(e) {
-    const val = e.detail.value
-    const parts = val.split('-')
-    this.setData({
-      recordDate: val,
-      recordDateText: `${parts[0]}年${parts[1]}月${parts[2]}日`
-    })
-  },
-
-  onTimeChange(e) {
-    const val = e.detail.value
-    this.setData({
-      recordTime: val,
-      recordTimeText: val
+  pickTime() {
+    const now = new Date(this.data.recordTimestamp)
+    wx.datePick({
+      mode: 'date',
+      value: util.formatDate(now.getTime()),
+      start: '2020-01-01',
+      end: '2099-12-31',
+      success: (res) => {
+        const timeStr = res.dateStr
+        this.setData({
+          recordTime: timeStr,
+          recordTimestamp: new Date(timeStr).getTime()
+        })
+      }
     })
   },
 
   selectVolume(e) {
-    this.setData({ urineVolume: e.currentTarget.dataset.val })
+    this.setData({ volumeLevel: e.currentTarget.dataset.level })
   },
 
   toggleSymptom(e) {
-    const idx = e.currentTarget.dataset.idx
+    const idx = e.currentTarget.dataset.index
     const symptoms = this.data.symptoms
     symptoms[idx].checked = !symptoms[idx].checked
     this.setData({ symptoms })
   },
 
   onScoreChange(e) {
-    const idx = e.currentTarget.dataset.idx
+    const idx = e.currentTarget.dataset.index
     const symptoms = this.data.symptoms
     symptoms[idx].score = e.detail.value
     this.setData({ symptoms })
@@ -76,34 +66,27 @@ Page({
     this.setData({ note: e.detail.value })
   },
 
-  saveRecord() {
-    if (!this.data.urineVolume) {
-      wx.showToast({ title: '请选择尿量', icon: 'none' })
-      return
-    }
-
-    const dateStr = this.data.recordDate + ' ' + this.data.recordTime
-    const recordTime = new Date(dateStr.replace(/-/g, '/')).getTime()
-
-    const symptomScores = {}
-    this.data.symptoms.forEach(s => {
-      if (s.checked) {
-        symptomScores[s.name] = s.score
-      }
-    })
-
+  handleSave() {
+    const { recordTimestamp, volumeLevel, symptoms, note } = this.data
     const record = {
-      recordTime,
-      urineVolume: this.data.urineVolume,
-      symptoms: this.data.symptoms.filter(s => s.checked).map(s => s.name),
-      symptomScores,
-      note: this.data.note
+      recordTime: recordTimestamp,
+      volumeLevel,
+      hasLeakage: symptoms[0].checked,
+      leakageSeverity: symptoms[0].checked ? symptoms[0].score : null,
+      hasUrgency: symptoms[1].checked,
+      urgencySeverity: symptoms[1].checked ? symptoms[1].score : null,
+      hasPain: symptoms[2].checked,
+      painSeverity: symptoms[2].checked ? symptoms[2].score : null,
+      hasWeakStream: symptoms[3].checked,
+      weakStreamSeverity: symptoms[3].checked ? symptoms[3].score : null,
+      hasIntermittent: symptoms[4].checked,
+      intermittentSeverity: symptoms[4].checked ? symptoms[4].score : null,
+      hasNocturia: symptoms[5].checked,
+      nocturiaSeverity: symptoms[5].checked ? symptoms[5].score : null,
+      note: note || null
     }
-
     storage.addUrinationRecord(record)
-    wx.showToast({ title: '记录成功', icon: 'success' })
-    setTimeout(() => {
-      wx.navigateBack()
-    }, 1500)
+    wx.showToast({ title: '记录已保存', icon: 'success' })
+    setTimeout(() => { wx.navigateBack() }, 1000)
   }
 })

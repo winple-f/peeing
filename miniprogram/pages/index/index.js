@@ -1,44 +1,23 @@
 const app = getApp()
-const util = require('../../utils/util.js')
+const storage = require('../../utils/storage.js')
 
 Page({
   data: {
+    welcomeText: '您好',
     patientId: '',
-    todayDate: '',
-    nextFollowup: null
+    todayCount: 0
   },
 
   onShow() {
     if (!app.checkLogin()) return
-    const patientId = app.getPatientId()
-    const today = util.formatDate(Date.now())
-
-    const nextFollowup = this.getNextFollowup()
-
+    const userInfo = app.globalData.userInfo || {}
+    const patientId = app.getPatientId() || ''
+    const todayCount = storage.getTodayCount()
     this.setData({
+      welcomeText: '您好，' + (userInfo.nickname || ''),
       patientId,
-      todayDate: today,
-      nextFollowup
+      todayCount
     })
-  },
-
-  getNextFollowup() {
-    const registerDate = wx.getStorageSync('registerDate') || Date.now()
-    const labels = ['基线评估', '1月随访', '3月随访', '6月随访']
-    const offsets = [0, 30, 90, 180]
-    const now = Date.now()
-
-    for (let i = 0; i < offsets.length; i++) {
-      const target = new Date(registerDate)
-      target.setDate(target.getDate() + offsets[i])
-      if (target.getTime() > now || i === 0) {
-        return {
-          name: labels[i],
-          date: util.formatDate(target.getTime())
-        }
-      }
-    }
-    return null
   },
 
   goRecord() {
@@ -50,14 +29,29 @@ Page({
   },
 
   goChart() {
-    wx.switchTab({ url: '/pages/chart/chart' })
+    wx.navigateTo({ url: '/pages/chart/chart' })
   },
 
   goHistory() {
-    wx.switchTab({ url: '/pages/history/history' })
+    wx.navigateTo({ url: '/pages/history/history' })
   },
 
   goExport() {
     wx.navigateTo({ url: '/pages/export/export' })
+  },
+
+  handleLogout() {
+    wx.showModal({
+      title: '退出登录',
+      content: '确定要退出登录吗？',
+      confirmText: '退出',
+      confirmColor: '#F44336',
+      success: (res) => {
+        if (res.confirm) {
+          app.clearLogin()
+          wx.reLaunch({ url: '/pages/login/login' })
+        }
+      }
+    })
   }
 })

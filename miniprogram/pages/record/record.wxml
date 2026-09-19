@@ -1,49 +1,46 @@
 <view class="container">
-  <view class="section">
-    <view class="section-title">排尿时间</view>
-    <picker mode="date" value="{{recordDate}}" bindchange="onDateChange">
-      <view class="picker-value">{{recordDateText}}</view>
-    </picker>
-    <picker mode="time" value="{{recordTime}}" bindchange="onTimeChange">
-      <view class="picker-value">{{recordTimeText}}</view>
-    </picker>
+  <text class="section-title">记录时间</text>
+  <view class="time-card" bindtap="pickTime">
+    <text class="time-text">{{recordTime}}</text>
   </view>
 
-  <view class="section">
-    <view class="section-title">尿量</view>
-    <view class="option-row">
-      <view class="option-item {{urineVolume === '少量' ? 'active' : ''}}" bindtap="selectVolume" data-val="少量">少量</view>
-      <view class="option-item {{urineVolume === '中等' ? 'active' : ''}}" bindtap="selectVolume" data-val="中等">中等</view>
-      <view class="option-item {{urineVolume === '大量' ? 'active' : ''}}" bindtap="selectVolume" data-val="大量">大量</view>
+  <text class="section-title">尿量</text>
+  <view class="volume-row">
+    <view class="volume-card {{volumeLevel === 0 ? 'selected' : ''}}" bindtap="selectVolume" data-level="0">
+      <text class="volume-icon">↓</text>
+      <text class="volume-text">少量</text>
+    </view>
+    <view class="volume-card {{volumeLevel === 1 ? 'selected' : ''}}" bindtap="selectVolume" data-level="1">
+      <text class="volume-icon">↓</text>
+      <text class="volume-text">中量</text>
+    </view>
+    <view class="volume-card {{volumeLevel === 2 ? 'selected' : ''}}" bindtap="selectVolume" data-level="2">
+      <text class="volume-icon">↓</text>
+      <text class="volume-text">大量</text>
     </view>
   </view>
 
-  <view class="section">
-    <view class="section-title">伴随症状（可选）</view>
-    <view class="symptom-list">
-      <view class="symptom-item" wx:for="{{symptoms}}" wx:key="name">
-        <view class="symptom-header" bindtap="toggleSymptom" data-idx="{{index}}">
-          <view class="checkbox {{item.checked ? 'checked' : ''}}">
-            <text wx:if="{{item.checked}}" class="check-mark">✓</text>
-          </view>
-          <text class="symptom-name">{{item.name}}</text>
-        </view>
-        <view class="score-slider" wx:if="{{item.checked}}">
-          <view class="score-labels">
-            <text class="score-label-left">1</text>
-            <text class="score-label-right">3</text>
-          </view>
-          <slider min="1" max="3" step="1" value="{{item.score}}" show-value="{{false}}" bindchange="onScoreChange" data-idx="{{index}}" block-size="28" activeColor="#4CAF50" backgroundColor="#E0E0E0" />
-          <view class="score-display">{{item.score}}分</view>
+  <text class="section-title">症状</text>
+  <view class="symptoms-card">
+    <view class="symptom-item" wx:for="{{symptoms}}" wx:key="key">
+      <view class="symptom-header" bindtap="toggleSymptom" data-index="{{index}}">
+        <view class="checkbox {{symptom.checked ? 'checked' : ''}}"></view>
+        <text class="symptom-label">{{symptom.label}}</text>
+      </view>
+      <view class="slider-area" wx:if="{{symptom.checked}}">
+        <text class="slider-label">严重程度</text>
+        <view class="slider-row">
+          <text class="slider-bound">1</text>
+          <slider class="severity-slider" min="1" max="3" value="{{symptom.score}}" step="1" block-size="28" activeColor="#2196F3" bindchange="onScoreChange" data-index="{{index}}" />
+          <text class="slider-bound">3</text>
+          <text class="score-display">{{symptom.score}}分</text>
         </view>
       </view>
     </view>
   </view>
 
-  <view class="section">
-    <view class="section-title">备注（可选）</view>
-    <textarea class="textarea" placeholder="其他情况说明" value="{{note}}" bindinput="onNoteInput" maxlength="200" />
-  </view>
+  <text class="section-title">备注</text>
+  <textarea class="note-input" placeholder="选填，记录其他情况" value="{{note}}" bindinput="onNoteInput" />
 
-  <button class="btn-save" bindtap="saveRecord">保存记录</button>
+  <button class="btn-save" bindtap="handleSave">保存</button>
 </view>

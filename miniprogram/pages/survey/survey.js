@@ -1,168 +1,153 @@
 const app = getApp()
 const storage = require('../../utils/storage.js')
-const surveyUtil = require('../../utils/survey.js')
 
 Page({
   data: {
-    step: 0,
-    surveyType: '',
-    questions: [],
-    totalSteps: 0,
-    currentQuestion: null,
-    currentAnswer: -1,
-    inputValue: '',
-    answers: [],
-    progressPercent: 0,
-    totalScore: 0,
-    resultLabel: '',
-    resultDesc: ''
+    currentStep: 0,
+    selectedTimePoint: 'T0基线',
+    iciqQ1: -1,
+    iciqQ2: -1,
+    iciqQ3: -1,
+    ipssAnswers: [-1, -1, -1, -1, -1, -1, -1],
+    qolScore: -1,
+    iciqTotalScore: 0,
+    ipssTotalScore: 0,
+    ipssSeverity: '轻度',
+    iciqQ1Options: ['从不漏尿', '大约每周1次或更少', '每周2~3次', '每天1次', '每天好几次', '一直漏尿'],
+    iciqQ2Options: ['不漏尿', '少量（几滴）', '中等量（内裤湿一片）', '大量（全湿了）'],
+    iciqQ3Options: ['0分 - 完全没影响', '2分 - 有一点影响', '4分 - 有些影响', '6分 - 影响中等', '8分 - 影响比较大', '10分 - 严重影响生活'],
+    ipssQuestions: [
+      { text: '排完尿后，是否经常感觉没有排干净？', options: ['无', '很少', '少半', '约半', '多半', '总是'] },
+      { text: '两次排尿间隔是否经常不到2小时？', options: ['无', '很少', '少半', '约半', '多半', '总是'] },
+      { text: '排尿时是否有断断续续的情况？', options: ['无', '很少', '少半', '约半', '多半', '总是'] },
+      { text: '有尿意时是否憋不住，需要马上去厕所？', options: ['无', '很少', '少半', '约半', '多半', '总是'] },
+      { text: '尿线是否变细了？', options: ['无', '很少', '少半', '约半', '多半', '总是'] },
+      { text: '排尿时是否需要用力才能开始？', options: ['无', '很少', '少半', '约半', '多半', '总是'] },
+      { text: '晚上睡觉后，一般要起来尿几次？', options: ['0次', '1次', '2次', '3次', '4次', '≥5次'] }
+    ],
+    qolOptions: ['非常高兴', '满意', '大致满意', '还可以', '不太满意', '苦恼', '很糟糕']
   },
 
-  selectSurvey(e) {
-    const type = e.currentTarget.dataset.type
-    let questions = []
-    if (type === 'iciq') {
-      questions = surveyUtil.ICIQ_SF_QUESTIONS
-    } else if (type === 'ipss') {
-      questions = surveyUtil.IPSS_QUESTIONS
-    } else if (type === 'qol') {
-      questions = [surveyUtil.QOL_QUESTION]
-    }
-    this.setData({
-      step: 1,
-      surveyType: type,
-      questions,
-      totalSteps: questions.length,
-      currentQuestion: questions[0],
-      currentAnswer: -1,
-      inputValue: '',
-      answers: new Array(questions.length).fill(-1),
-      progressPercent: 100 / questions.length
-    })
+  onLoad() {
+    if (!app.checkLogin()) return
   },
 
-  selectOption(e) {
+  selectTimePoint(e) {
+    this.setData({ selectedTimePoint: e.currentTarget.dataset.point })
+  },
+
+  onIciqQ1(e) {
+    this.setData({ iciqQ1: parseInt(e.detail.value) })
+  },
+
+  onIciqQ2(e) {
+    this.setData({ iciqQ2: parseInt(e.detail.value) })
+  },
+
+  onIciqQ3(e) {
+    this.setData({ iciqQ3: parseInt(e.detail.value) })
+  },
+
+  onIpssChange(e) {
     const idx = e.currentTarget.dataset.idx
-    this.setData({ currentAnswer: idx })
+    const val = parseInt(e.detail.value)
+    const answers = this.data.ipssAnswers
+    answers[idx] = val
+    this.setData({ ipssAnswers: answers })
   },
 
-  onInput(e) {
-    this.setData({ inputValue: e.detail.value })
+  onQolChange(e) {
+    this.setData({ qolScore: parseInt(e.detail.value) })
   },
 
-  prevQuestion() {
-    if (this.data.step <= 1) return
-    this.saveCurrentAnswer()
-    const newStep = this.data.step - 1
-    this.setData({
-      step: newStep,
-      currentQuestion: this.data.questions[newStep - 1],
-      currentAnswer: this.data.answers[newStep - 1],
-      inputValue: this.data.answers[newStep - 1] !== -1 ? String(this.data.answers[newStep - 1]) : '',
-      progressPercent: (newStep / this.data.totalSteps) * 100
-    })
-  },
-
-  nextQuestion() {
-    if (this.data.currentAnswer === -1 && this.data.currentQuestion.type !== 'input') {
-      return
+  goPrev() {
+    if (this.data.currentStep > 0) {
+      this.setData({ currentStep: this.data.currentStep - 1 })
     }
-    this.saveCurrentAnswer()
-    const newStep = this.data.step + 1
-    this.setData({
-      step: newStep,
-      currentQuestion: this.data.questions[newStep - 1],
-      currentAnswer: this.data.answers[newStep - 1] !== undefined ? this.data.answers[newStep - 1] : -1,
-      inputValue: this.data.answers[newStep - 1] !== -1 && this.data.questions[newStep - 1].type === 'input' ? String(this.data.answers[newStep - 1]) : '',
-      progressPercent: (newStep / this.data.totalSteps) * 100
-    })
   },
 
-  saveCurrentAnswer() {
-    const answers = this.data.answers
-    if (this.data.currentQuestion.type === 'input') {
-      answers[this.data.step - 1] = parseInt(this.data.inputValue) || 0
+  goNext() {
+    const step = this.data.currentStep
+    if (step < 4) {
+      if (!this.validateStep(step)) return
+      if (step === 3) {
+        this.submitSurvey()
+        return
+      }
+      this.setData({ currentStep: step + 1 })
     } else {
-      answers[this.data.step - 1] = this.data.currentAnswer
+      wx.navigateBack()
     }
-    this.setData({ answers })
+  },
+
+  validateStep(step) {
+    if (step === 0) return true
+    if (step === 1) {
+      if (this.data.iciqQ1 === -1 || this.data.iciqQ2 === -1 || this.data.iciqQ3 === -1) {
+        wx.showToast({ title: '请完成所有问题', icon: 'none' })
+        return false
+      }
+      return true
+    }
+    if (step === 2) {
+      for (let i = 0; i < 7; i++) {
+        if (this.data.ipssAnswers[i] === -1) {
+          wx.showToast({ title: '请完成所有问题', icon: 'none' })
+          return false
+        }
+      }
+      return true
+    }
+    if (step === 3) {
+      if (this.data.qolScore === -1) {
+        wx.showToast({ title: '请选择一个答案', icon: 'none' })
+        return false
+      }
+      return true
+    }
+    return true
   },
 
   submitSurvey() {
-    this.saveCurrentAnswer()
-    const { surveyType, answers } = this.data
-    let score = 0
-    let label = ''
-    let desc = ''
+    const iciqTotal = this.data.iciqQ1 + this.data.iciqQ2 + (this.data.iciqQ3 * 2)
+    const iciqScores = [0, 1, 2, 3, 4, 5]
+    const iciqQ3Scores = [0, 2, 4, 6, 8, 10]
+    const realIciqTotal = iciqScores[this.data.iciqQ1] + iciqScores[this.data.iciqQ2] + iciqQ3Scores[this.data.iciqQ3]
 
-    if (surveyType === 'iciq') {
-      score = surveyUtil.calcIciqScore(answers)
-      if (score === 0) {
-        desc = '未发现明显漏尿症状'
-      } else if (score <= 7) {
-        label = '轻度'
-        desc = '漏尿对生活影响较小，建议继续观察'
-      } else if (score <= 14) {
-        label = '中度'
-        desc = '漏尿对生活有一定影响，建议咨询医生'
-      } else {
-        label = '重度'
-        desc = '漏尿对生活影响较大，建议尽快就医'
-      }
-    } else if (surveyType === 'ipss') {
-      score = surveyUtil.calcIpssScore(answers)
-      label = surveyUtil.getIpssSeverity(score)
-      if (score <= 7) {
-        desc = '前列腺症状较轻，建议定期复查'
-      } else if (score <= 19) {
-        desc = '前列腺症状中等，建议咨询医生是否需要治疗'
-      } else {
-        desc = '前列腺症状较重，建议尽快就医评估'
-      }
-    } else if (surveyType === 'qol') {
-      score = surveyUtil.calcQolScore(answers[0])
-      if (score <= 1) {
-        desc = '对目前排尿情况满意'
-      } else if (score <= 3) {
-        desc = '对排尿情况有一定不满，建议关注'
-      } else {
-        desc = '对排尿情况很不满意，建议就医'
-      }
+    let ipssTotal = 0
+    for (let i = 0; i < 7; i++) {
+      ipssTotal += this.data.ipssAnswers[i]
     }
+
+    const severity = ipssTotal <= 7 ? '轻度' : (ipssTotal <= 19 ? '中度' : '重度')
 
     const record = {
-      type: surveyType,
-      answers,
-      score,
-      label,
-      createdAt: Date.now()
+      timePoint: this.data.selectedTimePoint,
+      surveyDate: Date.now(),
+      iciqQ1: this.data.iciqQ1,
+      iciqQ2: this.data.iciqQ2,
+      iciqQ3: this.data.iciqQ3,
+      iciqTotalScore: realIciqTotal,
+      ipssQ1: this.data.ipssAnswers[0],
+      ipssQ2: this.data.ipssAnswers[1],
+      ipssQ3: this.data.ipssAnswers[2],
+      ipssQ4: this.data.ipssAnswers[3],
+      ipssQ5: this.data.ipssAnswers[4],
+      ipssQ6: this.data.ipssAnswers[5],
+      ipssQ7: this.data.ipssAnswers[6],
+      ipssTotalScore: ipssTotal,
+      qolScore: this.data.qolScore
     }
+
     storage.addSurveyRecord(record)
 
     this.setData({
-      step: -1,
-      totalScore: score,
-      resultLabel: label,
-      resultDesc: desc
+      currentStep: 4,
+      iciqTotalScore: realIciqTotal,
+      ipssTotalScore: ipssTotal,
+      ipssSeverity: severity
     })
-  },
 
-  backToHome() {
-    wx.navigateBack()
-  },
-
-  redoSurvey() {
-    this.setData({
-      step: 0,
-      surveyType: '',
-      questions: [],
-      currentQuestion: null,
-      currentAnswer: -1,
-      inputValue: '',
-      answers: [],
-      totalScore: 0,
-      resultLabel: '',
-      resultDesc: ''
-    })
+    wx.showToast({ title: '问卷已提交', icon: 'success' })
   }
 })
