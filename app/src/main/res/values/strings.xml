@@ -91,6 +91,14 @@
     <string name="export_recent_30">最近30天</string>
     <string name="export_recent_90">最近90天</string>
 
+    <!-- 图表统计 -->
+    <string name="chart_title">数据统计</string>
+    <string name="chart_heatmap">症状热力图</string>
+    <string name="chart_line">排尿次数</string>
+    <string name="chart_weekly">周统计</string>
+    <string name="chart_monthly">月统计</string>
+    <string name="chart_no_data">暂无数据</string>
+
     <!-- 历史 -->
     <string name="history_title">历史记录</string>
     <string name="tab_urination">排尿记录</string>

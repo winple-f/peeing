@@ -39,6 +39,9 @@
             android:name=".ui.history.HistoryActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.chart.ChartActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.export.ExportActivity"
             android:exported="false" />
 

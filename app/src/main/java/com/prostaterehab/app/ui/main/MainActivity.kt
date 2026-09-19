@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.prostaterehab.app.ProstateRehabApp
 import com.prostaterehab.app.databinding.ActivityMainBinding
+import com.prostaterehab.app.ui.chart.ChartActivity
 import com.prostaterehab.app.ui.export.ExportActivity
 import com.prostaterehab.app.ui.history.HistoryActivity
 import com.prostaterehab.app.ui.login.LoginActivity
@@ -68,6 +69,11 @@ class MainActivity : AppCompatActivity() {
         // 查看记录
         binding.cardHistory.setOnClickListener {
             startActivity(Intent(this, HistoryActivity::class.java))
+        }
+
+        // 数据统计
+        binding.cardChart.setOnClickListener {
+            startActivity(Intent(this, ChartActivity::class.java))
         }
 
         // 导出数据
