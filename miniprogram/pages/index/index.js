@@ -9,12 +9,12 @@ Page({
   },
 
   onShow() {
-    if (!app.checkLogin()) return
+    app.checkLogin()
     const userInfo = app.globalData.userInfo || {}
     const patientId = app.getPatientId() || ''
     const todayCount = storage.getTodayCount()
     this.setData({
-      welcomeText: '您好，' + (userInfo.nickname || ''),
+      welcomeText: '您好，' + (userInfo.nickname || '微信用户'),
       patientId,
       todayCount
     })
@@ -43,13 +43,13 @@ Page({
   handleLogout() {
     wx.showModal({
       title: '退出登录',
-      content: '确定要退出登录吗？',
+      content: '退出后将清除当前编号，重新进入会生成新编号。',
       confirmText: '退出',
       confirmColor: '#F44336',
       success: (res) => {
         if (res.confirm) {
           app.clearLogin()
-          wx.reLaunch({ url: '/pages/login/login' })
+          wx.reLaunch({ url: '/pages/index/index' })
         }
       }
     })

@@ -2,29 +2,51 @@ App({
   globalData: {
     userInfo: null,
     patientId: null,
-    userId: null,
-    registerDate: null
+    userId: null
   },
 
   onLaunch() {
-    const userInfo = wx.getStorageSync('userInfo')
-    const patientId = wx.getStorageSync('patientId')
-    const userId = wx.getStorageSync('userId')
-    if (userInfo) {
-      this.globalData.userInfo = userInfo
+    this.autoLogin()
+  },
+
+  autoLogin() {
+    const storedId = wx.getStorageSync('patientId')
+    const storedUser = wx.getStorageSync('userInfo')
+    if (storedId && storedUser) {
+      this.globalData.patientId = storedId
+      this.globalData.userInfo = storedUser
+      this.globalData.userId = storedUser.userId || null
+      return
     }
-    if (patientId) {
-      this.globalData.patientId = patientId
-    }
-    if (userId) {
-      this.globalData.userId = userId
-    }
+
+    wx.getUserProfile({
+      desc: '用于完善患者资料',
+      success: (res) => {
+        const userInfo = res.userInfo
+        const patientId = this.generatePatientId()
+        const userId = Date.now()
+        this.globalData.userInfo = { ...userInfo, userId, nickname: userInfo.nickName }
+        this.globalData.patientId = patientId
+        this.globalData.userId = userId
+        wx.setStorageSync('userInfo', this.globalData.userInfo)
+        wx.setStorageSync('patientId', patientId)
+        wx.setStorageSync('userId', userId)
+      },
+      fail: () => {
+        const patientId = this.generatePatientId()
+        const userId = Date.now()
+        this.globalData.userInfo = { userId, nickname: '微信用户' }
+        this.globalData.patientId = patientId
+        this.globalData.userId = userId
+        wx.setStorageSync('userInfo', this.globalData.userInfo)
+        wx.setStorageSync('patientId', patientId)
+        wx.setStorageSync('userId', userId)
+      }
+    })
   },
 
   getPatientId() {
-    if (this.globalData.patientId) {
-      return this.globalData.patientId
-    }
+    if (this.globalData.patientId) return this.globalData.patientId
     const stored = wx.getStorageSync('patientId')
     if (stored) {
       this.globalData.patientId = stored
@@ -34,9 +56,7 @@ App({
   },
 
   getUserId() {
-    if (this.globalData.userId !== null) {
-      return this.globalData.userId
-    }
+    if (this.globalData.userId !== null) return this.globalData.userId
     const stored = wx.getStorageSync('userId')
     if (stored !== '' && stored !== null && stored !== undefined) {
       this.globalData.userId = stored
@@ -54,18 +74,10 @@ App({
     return patientId
   },
 
-  setLogin(userId, userInfo) {
-    this.globalData.userId = userId
-    this.globalData.userInfo = userInfo
-    wx.setStorageSync('userId', userId)
-    wx.setStorageSync('userInfo', userInfo)
-  },
-
   checkLogin() {
-    const userId = this.getUserId()
-    if (userId === null) {
-      wx.redirectTo({ url: '/pages/login/login' })
-      return false
+    const patientId = this.getPatientId()
+    if (!patientId) {
+      this.autoLogin()
     }
     return true
   },
@@ -77,6 +89,5 @@ App({
     wx.removeStorageSync('userId')
     wx.removeStorageSync('userInfo')
     wx.removeStorageSync('patientId')
-    wx.removeStorageSync('registerDate')
   }
 })
