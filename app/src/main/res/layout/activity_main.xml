@@ -108,7 +108,7 @@
                         android:layout_width="@dimen/icon_size_xlarge"
                         android:layout_height="@dimen/icon_size_xlarge"
                         android:src="@android:drawable/ic_menu_add"
-                        android:tint="@color/primary"
+                        app:tint="@color/primary"
                         android:contentDescription="记录" />
 
                     <TextView
@@ -144,7 +144,7 @@
                         android:layout_width="@dimen/icon_size_xlarge"
                         android:layout_height="@dimen/icon_size_xlarge"
                         android:src="@android:drawable/ic_menu_edit"
-                        android:tint="@color/accent"
+                        app:tint="@color/accent"
                         android:contentDescription="量表" />
 
                     <TextView
@@ -188,7 +188,7 @@
                         android:layout_width="@dimen/icon_size_xlarge"
                         android:layout_height="@dimen/icon_size_xlarge"
                         android:src="@android:drawable/ic_menu_agenda"
-                        android:tint="@color/success"
+                        app:tint="@color/success"
                         android:contentDescription="历史" />
 
                     <TextView
@@ -224,7 +224,7 @@
                         android:layout_width="@dimen/icon_size_xlarge"
                         android:layout_height="@dimen/icon_size_xlarge"
                         android:src="@android:drawable/ic_menu_share"
-                        android:tint="@color/primary_dark"
+                        app:tint="@color/primary_dark"
                         android:contentDescription="导出" />
 
                     <TextView
