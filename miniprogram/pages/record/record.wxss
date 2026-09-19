@@ -1,0 +1,151 @@
+.container {
+  padding: 32rpx;
+  padding-bottom: 160rpx;
+}
+
+.section {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.06);
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #212121;
+  margin-bottom: 24rpx;
+}
+
+.picker-value {
+  font-size: 36rpx;
+  color: #2196F3;
+  padding: 16rpx 0;
+  border-bottom: 2rpx solid #E0E0E0;
+  margin-bottom: 16rpx;
+}
+
+.option-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.option-item {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 36rpx;
+  border-radius: 12rpx;
+  background: #F5F5F5;
+  color: #616161;
+  border: 4rpx solid transparent;
+}
+
+.option-item.active {
+  background: #E8F5E9;
+  color: #4CAF50;
+  border-color: #4CAF50;
+  font-weight: bold;
+}
+
+.symptom-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.symptom-item {
+  border-bottom: 2rpx solid #F0F0F0;
+  padding-bottom: 16rpx;
+}
+
+.symptom-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.symptom-header {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.checkbox {
+  width: 48rpx;
+  height: 48rpx;
+  border: 4rpx solid #BDBDBD;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox.checked {
+  background: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.check-mark {
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.symptom-name {
+  font-size: 36rpx;
+  color: #212121;
+}
+
+.score-slider {
+  margin-top: 16rpx;
+  padding-left: 64rpx;
+  padding-right: 16rpx;
+}
+
+.score-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.score-label-left,
+.score-label-right {
+  font-size: 28rpx;
+  color: #9E9E9E;
+}
+
+.score-display {
+  text-align: center;
+  font-size: 32rpx;
+  color: #4CAF50;
+  font-weight: bold;
+  margin-top: 8rpx;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120rpx;
+  font-size: 32rpx;
+  padding: 16rpx;
+  box-sizing: border-box;
+  border: 2rpx solid #E0E0E0;
+  border-radius: 12rpx;
+}
+
+.btn-save {
+  position: fixed;
+  bottom: 32rpx;
+  left: 32rpx;
+  right: 32rpx;
+  background: #4CAF50;
+  color: #FFFFFF;
+  font-size: 40rpx;
+  font-weight: bold;
+  border-radius: 12rpx;
+  padding: 24rpx 0;
+  text-align: center;
+  border: none;
+  line-height: 1.5;
+}

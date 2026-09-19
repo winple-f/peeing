@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="section">
+    <view class="section-title">排尿时间</view>
+    <picker mode="date" value="{{recordDate}}" bindchange="onDateChange">
+      <view class="picker-value">{{recordDateText}}</view>
+    </picker>
+    <picker mode="time" value="{{recordTime}}" bindchange="onTimeChange">
+      <view class="picker-value">{{recordTimeText}}</view>
+    </picker>
+  </view>
+
+  <view class="section">
+    <view class="section-title">尿量</view>
+    <view class="option-row">
+      <view class="option-item {{urineVolume === '少量' ? 'active' : ''}}" bindtap="selectVolume" data-val="少量">少量</view>
+      <view class="option-item {{urineVolume === '中等' ? 'active' : ''}}" bindtap="selectVolume" data-val="中等">中等</view>
+      <view class="option-item {{urineVolume === '大量' ? 'active' : ''}}" bindtap="selectVolume" data-val="大量">大量</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">伴随症状（可选）</view>
+    <view class="symptom-list">
+      <view class="symptom-item" wx:for="{{symptoms}}" wx:key="name">
+        <view class="symptom-header" bindtap="toggleSymptom" data-idx="{{index}}">
+          <view class="checkbox {{item.checked ? 'checked' : ''}}">
+            <text wx:if="{{item.checked}}" class="check-mark">✓</text>
+          </view>
+          <text class="symptom-name">{{item.name}}</text>
+        </view>
+        <view class="score-slider" wx:if="{{item.checked}}">
+          <view class="score-labels">
+            <text class="score-label-left">1</text>
+            <text class="score-label-right">3</text>
+          </view>
+          <slider min="1" max="3" step="1" value="{{item.score}}" show-value="{{false}}" bindchange="onScoreChange" data-idx="{{index}}" block-size="28" activeColor="#4CAF50" backgroundColor="#E0E0E0" />
+          <view class="score-display">{{item.score}}分</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">备注（可选）</view>
+    <textarea class="textarea" placeholder="其他情况说明" value="{{note}}" bindinput="onNoteInput" maxlength="200" />
+  </view>
+
+  <button class="btn-save" bindtap="saveRecord">保存记录</button>
+</view>

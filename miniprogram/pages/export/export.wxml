@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="summary-card">
+    <view class="summary-title">数据概况</view>
+    <view class="summary-row">
+      <text class="summary-label">患者编号</text>
+      <text class="summary-value">{{patientId}}</text>
+    </view>
+    <view class="summary-row">
+      <text class="summary-label">排尿记录</text>
+      <text class="summary-value">{{recordCount}}条</text>
+    </view>
+    <view class="summary-row">
+      <text class="summary-label">量表记录</text>
+      <text class="summary-value">{{surveyCount}}条</text>
+    </view>
+    <view class="summary-row">
+      <text class="summary-label">记录时间</text>
+      <text class="summary-value">{{dateRange}}</text>
+    </view>
+  </view>
+
+  <view class="export-section">
+    <view class="section-title">导出内容选择</view>
+    <view class="checkbox-row" bindtap="toggleExportType" data-type="urination">
+      <view class="checkbox {{exportTypes.urination ? 'checked' : ''}}">
+        <text wx:if="{{exportTypes.urination}}" class="check-mark">✓</text>
+      </view>
+      <text class="checkbox-label">排尿记录（时间、尿量、症状、评分）</text>
+    </view>
+    <view class="checkbox-row" bindtap="toggleExportType" data-type="survey">
+      <view class="checkbox {{exportTypes.survey ? 'checked' : ''}}">
+        <text wx:if="{{exportTypes.survey}}" class="check-mark">✓</text>
+      </view>
+      <text class="checkbox-label">量表记录（ICIQ-SF/IPSS/QoL评分）</text>
+    </view>
+  </view>
+
+  <view class="preview-section" wx:if="{{csvPreview}}">
+    <view class="section-title">数据预览</view>
+    <scroll-view scroll-x class="preview-scroll">
+      <view class="preview-content">
+        <text class="preview-text">{{csvPreview}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <button class="btn-generate" bindtap="generateCSV">生成数据文件</button>
+  <button class="btn-copy" wx:if="{{csvContent}}" bindtap="copyToClipboard">复制到剪贴板</button>
+</view>

@@ -1,0 +1,52 @@
+<view class="container">
+  <view class="tab-bar">
+    <view class="tab-item {{activeTab === 'urination' ? 'active' : ''}}" bindtap="switchTab" data-tab="urination">排尿记录</view>
+    <view class="tab-item {{activeTab === 'survey' ? 'active' : ''}}" bindtap="switchTab" data-tab="survey">量表记录</view>
+  </view>
+
+  <block wx:if="{{activeTab === 'urination'}}">
+    <view class="empty-tip" wx:if="{{groupedRecords.length === 0}}">
+      <text>暂无排尿记录</text>
+    </view>
+    <view class="record-group" wx:for="{{groupedRecords}}" wx:key="dateText">
+      <view class="group-header">
+        <text class="group-date">{{item.dateText}}</text>
+        <text class="group-count">共{{item.records.length}}次</text>
+      </view>
+      <view class="record-card" wx:for="{{item.records}}" wx:for-item="rec" wx:key="id">
+        <view class="record-top">
+          <text class="record-time">{{rec.timeText}}</text>
+          <text class="record-volume">{{rec.urineVolume}}</text>
+        </view>
+        <view class="record-symptoms" wx:if="{{rec.symptoms.length > 0}}">
+          <view class="symptom-tag" wx:for="{{rec.symptoms}}" wx:for-item="sym" wx:key="*this">{{sym}}</view>
+        </view>
+        <view class="record-scores" wx:if="{{rec.scoreList.length > 0}}">
+          <text class="score-item" wx:for="{{rec.scoreList}}" wx:for-item="sc" wx:key="name">{{sc.name}}：{{sc.score}}分</text>
+        </view>
+        <view class="record-note" wx:if="{{rec.note}}">
+          <text>备注：{{rec.note}}</text>
+        </view>
+        <view class="record-actions">
+          <text class="action-delete" bindtap="deleteRecord" data-id="{{rec.id}}">删除</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{activeTab === 'survey'}}">
+    <view class="empty-tip" wx:if="{{surveyRecords.length === 0}}">
+      <text>暂无量表记录</text>
+    </view>
+    <view class="survey-card" wx:for="{{surveyRecords}}" wx:key="id">
+      <view class="survey-top">
+        <text class="survey-type">{{item.typeText}}</text>
+        <text class="survey-date">{{item.dateText}}</text>
+      </view>
+      <view class="survey-score-row">
+        <text class="survey-score">{{item.score}}分</text>
+        <text class="survey-label" wx:if="{{item.label}}">{{item.label}}</text>
+      </view>
+    </view>
+  </block>
+</view>

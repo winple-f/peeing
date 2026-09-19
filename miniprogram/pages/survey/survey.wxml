@@ -1,0 +1,60 @@
+<view class="container">
+  <block wx:if="{{step === 0}}">
+    <view class="section-title">请选择评估量表</view>
+    <view class="survey-list">
+      <view class="survey-card" bindtap="selectSurvey" data-type="iciq">
+        <view class="survey-card-title">ICIQ-SF</view>
+        <view class="survey-card-desc">国际尿失禁问卷简表</view>
+        <view class="survey-card-info">4题 · 约2分钟</view>
+      </view>
+      <view class="survey-card" bindtap="selectSurvey" data-type="ipss">
+        <view class="survey-card-title">IPSS</view>
+        <view class="survey-card-desc">国际前列腺症状评分</view>
+        <view class="survey-card-info">7题 · 约3分钟</view>
+      </view>
+      <view class="survey-card" bindtap="selectSurvey" data-type="qol">
+        <view class="survey-card-title">QoL</view>
+        <view class="survey-card-desc">生活质量评估</view>
+        <view class="survey-card-info">1题 · 约1分钟</view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{step > 0}}">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width:{{progressPercent}}%"></view>
+    </view>
+    <view class="progress-text">第{{step}}题 / 共{{totalSteps}}题</view>
+
+    <view class="question-area">
+      <view class="question-text">{{currentQuestion.text}}</view>
+      <view class="option-list">
+        <view class="option-item {{currentAnswer === idx ? 'selected' : ''}}"
+          wx:for="{{currentQuestion.options}}" wx:key="*this"
+          bindtap="selectOption" data-idx="{{index}}">
+          <text class="option-text">{{item}}</text>
+        </view>
+      </view>
+      <view class="input-area" wx:if="{{currentQuestion.type === 'input'}}">
+        <input class="number-input" type="number" placeholder="请输入数字" value="{{inputValue}}" bindinput="onInput" />
+      </view>
+    </view>
+
+    <view class="nav-buttons">
+      <button class="btn-prev" wx:if="{{step > 1}}" bindtap="prevQuestion">上一题</button>
+      <button class="btn-next" wx:if="{{step < totalSteps}}" bindtap="nextQuestion" disabled="{{currentAnswer === -1 && currentQuestion.type !== 'input'}}">下一题</button>
+      <button class="btn-submit" wx:if="{{step === totalSteps}}" bindtap="submitSurvey" disabled="{{currentAnswer === -1 && currentQuestion.type !== 'input'}}">提交评估</button>
+    </view>
+  </block>
+
+  <block wx:if="{{step === -1}}">
+    <view class="result-area">
+      <view class="result-title">评估完成</view>
+      <view class="result-score">{{totalScore}}分</view>
+      <view class="result-label" wx:if="{{resultLabel}}">{{resultLabel}}</view>
+      <view class="result-desc">{{resultDesc}}</view>
+      <button class="btn-back" bindtap="backToHome">返回首页</button>
+      <button class="btn-redo" bindtap="redoSurvey">再做一次</button>
+    </view>
+  </block>
+</view>

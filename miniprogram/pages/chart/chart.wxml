@@ -1,0 +1,76 @@
+<view class="container">
+  <view class="tab-bar">
+    <view class="tab-item {{activeTab === 'heatmap' ? 'active' : ''}}" bindtap="switchTab" data-tab="heatmap">症状热力图</view>
+    <view class="tab-item {{activeTab === 'line' ? 'active' : ''}}" bindtap="switchTab" data-tab="line">排尿趋势</view>
+  </view>
+
+  <block wx:if="{{activeTab === 'heatmap'}}">
+    <view class="heatmap-section">
+      <view class="month-nav">
+        <view class="nav-btn" bindtap="prevMonth">‹</view>
+        <text class="month-label">{{heatmapYear}}年{{heatmapMonth}}月</text>
+        <view class="nav-btn" bindtap="nextMonth">›</view>
+      </view>
+      <view class="weekday-row">
+        <text class="weekday-cell">日</text>
+        <text class="weekday-cell">一</text>
+        <text class="weekday-cell">二</text>
+        <text class="weekday-cell">三</text>
+        <text class="weekday-cell">四</text>
+        <text class="weekday-cell">五</text>
+        <text class="weekday-cell">六</text>
+      </view>
+      <view class="calendar-grid">
+        <view class="calendar-cell {{item.empty ? 'empty' : ''}}" wx:for="{{calendarDays}}" wx:key="day" style="background:{{item.color}}">
+          <text class="cell-day" wx:if="{{!item.empty}}">{{item.day}}</text>
+          <text class="cell-score" wx:if="{{!item.empty && item.score > 0}}">{{item.score}}</text>
+        </view>
+      </view>
+      <view class="legend">
+        <text class="legend-label">症状评分</text>
+        <view class="legend-bar">
+          <view class="legend-color" style="background:#F5F5F5"></view>
+          <view class="legend-color" style="background:#FFF9C4"></view>
+          <view class="legend-color" style="background:#FFE082"></view>
+          <view class="legend-color" style="background:#FFB74D"></view>
+          <view class="legend-color" style="background:#FF8A65"></view>
+        </view>
+        <view class="legend-range">
+          <text class="legend-text">无</text>
+          <text class="legend-text">高</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{activeTab === 'line'}}">
+    <view class="line-section">
+      <view class="period-bar">
+        <view class="period-item {{linePeriod === 'week' ? 'active' : ''}}" bindtap="switchPeriod" data-period="week">周统计</view>
+        <view class="period-item {{linePeriod === 'month' ? 'active' : ''}}" bindtap="switchPeriod" data-period="month">月统计</view>
+      </view>
+      <view class="stats-summary">
+        <view class="stats-item">
+          <text class="stats-label">总次数</text>
+          <text class="stats-value">{{totalCount}}次</text>
+        </view>
+        <view class="stats-item">
+          <text class="stats-label">日均</text>
+          <text class="stats-value">{{avgCount}}次</text>
+        </view>
+      </view>
+      <view class="chart-canvas-wrapper">
+        <canvas canvas-id="lineChart" class="chart-canvas"></canvas>
+      </view>
+      <view class="chart-data-list">
+        <view class="data-row" wx:for="{{chartData}}" wx:key="date">
+          <text class="data-date">{{item.date}}</text>
+          <view class="data-bar-bg">
+            <view class="data-bar" style="width:{{item.barWidth}}%"></view>
+          </view>
+          <text class="data-count">{{item.count}}次</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

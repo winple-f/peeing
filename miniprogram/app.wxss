@@ -1,0 +1,81 @@
+/* 全局样式 */
+page {
+  background-color: #F5F5F5;
+  font-size: 32rpx;
+  color: #212121;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 适老化大字体 */
+.text-large { font-size: 36rpx; }
+.text-xlarge { font-size: 42rpx; }
+.text-small { font-size: 28rpx; }
+.text-secondary { color: #757575; }
+.text-primary { color: #212121; }
+.text-bold { font-weight: bold; }
+
+/* 颜色 */
+.color-primary { color: #2196F3; }
+.color-success { color: #4CAF50; }
+.color-danger { color: #F44336; }
+.color-accent { color: #FF9800; }
+
+/* 卡片 */
+.card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.08);
+}
+
+/* 大按钮 */
+.btn-primary {
+  background: #2196F3;
+  color: #FFFFFF;
+  font-size: 36rpx;
+  font-weight: bold;
+  border-radius: 12rpx;
+  padding: 24rpx 0;
+  text-align: center;
+  width: 100%;
+  border: none;
+  line-height: 1.5;
+}
+
+.btn-primary[disabled] {
+  background: #BDBDBD;
+  color: #FFFFFF;
+}
+
+.btn-success {
+  background: #4CAF50;
+  color: #FFFFFF;
+  font-size: 36rpx;
+  font-weight: bold;
+  border-radius: 12rpx;
+  padding: 24rpx 0;
+  text-align: center;
+  width: 100%;
+  border: none;
+  line-height: 1.5;
+}
+
+/* 容器 */
+.container {
+  padding: 32rpx;
+}
+
+/* 标题 */
+.section-title {
+  font-size: 42rpx;
+  font-weight: bold;
+  color: #212121;
+  margin-bottom: 24rpx;
+}
+
+/* 选中状态 */
+.selected {
+  background: #E3F2FD !important;
+  border-color: #2196F3 !important;
+}
