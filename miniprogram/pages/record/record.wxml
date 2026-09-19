@@ -22,7 +22,7 @@
 
   <text class="section-title">症状</text>
   <view class="symptoms-card">
-    <view class="symptom-item" wx:for="{{symptoms}}" wx:key="key">
+    <view class="symptom-item" wx:for="{{symptoms}}" wx:key="key" wx:for-item="symptom">
       <view class="symptom-header" bindtap="toggleSymptom" data-index="{{index}}">
         <view class="checkbox {{symptom.checked ? 'checked' : ''}}"></view>
         <text class="symptom-label">{{symptom.label}}</text>
