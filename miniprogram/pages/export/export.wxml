@@ -19,6 +19,4 @@
   </view>
 
   <button class="btn-export" bindtap="handleExport">导出为Excel文件</button>
-
-  <text class="export-hint">导出的文件会保存在手机的文档文件夹中，您可以通过微信等方式发送给医生。</text>
 </view>
