@@ -1,26 +1,25 @@
 package com.prostaterehab.app.ui.export
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.widget.RadioGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.prostaterehab.app.ProstateRehabApp
 import com.prostaterehab.app.databinding.ActivityExportBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.apache.poi.ss.usermodel.FillPatternType
-import org.apache.poi.ss.usermodel.IndexedColors
-import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
-import java.io.FileOutputStream
+import java.io.OutputStreamWriter
+import java.io.Writer
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -30,7 +29,7 @@ class ExportActivity : AppCompatActivity() {
     private lateinit var binding: ActivityExportBinding
     private lateinit var app: ProstateRehabApp
     private var userId: Long = -1
-    private var exportRange = 0 // 0=全部, 1=最近30天, 2=最近90天
+    private var exportRange = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,43 +61,7 @@ class ExportActivity : AppCompatActivity() {
         }
 
         binding.btnExport.setOnClickListener {
-            if (checkPermission()) {
-                exportData()
-            } else {
-                requestPermission()
-            }
-        }
-    }
-
-    private fun checkPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            true // Android 10+ 不需要存储权限，用 MediaStore 或 app 私有目录
-        } else {
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED
-        }
-    }
-
-    private fun requestPermission() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-            100
-        )
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 100 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             exportData()
-        } else {
-            Toast.makeText(this, "需要存储权限才能导出文件", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -109,7 +72,7 @@ class ExportActivity : AppCompatActivity() {
 
             val result = withContext(Dispatchers.IO) {
                 try {
-                    val file = createExcelFile()
+                    val file = createCsvFile()
                     Result.success(file.absolutePath)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -122,34 +85,45 @@ class ExportActivity : AppCompatActivity() {
 
             if (result.isSuccess) {
                 val path = result.getOrNull()
-                Toast.makeText(
-                    this@ExportActivity,
-                    String.format(getString(com.prostaterehab.app.R.string.export_success), path),
-                    Toast.LENGTH_LONG
-                ).show()
+                val file = path?.let { File(it) }
+                if (file != null && file.exists()) {
+                    shareFile(file)
+                }
             } else {
-                Toast.makeText(
+                android.widget.Toast.makeText(
                     this@ExportActivity,
                     getString(com.prostaterehab.app.R.string.export_failed),
-                    Toast.LENGTH_SHORT
+                    android.widget.Toast.LENGTH_SHORT
                 ).show()
             }
         }
     }
 
-    private suspend fun createExcelFile(): File {
+    private fun shareFile(file: File) {
+        val uri = FileProvider.getUriForFile(
+            this,
+            "${packageName}.fileprovider",
+            file
+        )
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/csv"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        startActivity(Intent.createChooser(intent, "分享导出文件"))
+    }
+
+    private suspend fun createCsvFile(): File {
         val user = app.userRepository.getUserById(userId)
             ?: throw Exception("用户不存在")
 
-        // 计算导出时间范围
         val endTime = System.currentTimeMillis()
         val startTime = when (exportRange) {
-            1 -> endTime - 30L * 24 * 60 * 60 * 1000 // 最近30天
-            2 -> endTime - 90L * 24 * 60 * 60 * 1000 // 最近90天
-            else -> 0L // 全部
+            1 -> endTime - 30L * 24 * 60 * 60 * 1000
+            2 -> endTime - 90L * 24 * 60 * 60 * 1000
+            else -> 0L
         }
 
-        // 获取数据
         val urinationRecords = if (startTime > 0) {
             app.urinationRecordRepository.getRecordsByDateRange(userId, startTime, endTime)
         } else {
@@ -158,119 +132,73 @@ class ExportActivity : AppCompatActivity() {
 
         val surveyRecords = app.surveyRecordRepository.getRecordsListByUserId(userId)
 
-        // 创建工作簿
-        val workbook = XSSFWorkbook()
-        val headerFont = workbook.createFont().apply {
-            bold = true
-            fontHeightInPoints = 12
-        }
-        val headerStyle = workbook.createCellStyle().apply {
-            fillForegroundColor = IndexedColors.LIGHT_BLUE.index
-            fillPattern = FillPatternType.SOLID_FOREGROUND
-            setFont(headerFont)
-        }
+        val sdf = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA)
+        val fileName = "康复数据_${user.patientNumber}_${sdf.format(Date())}.csv"
 
-        // Sheet 1: 患者信息
-        val userSheet = workbook.createSheet("患者信息")
-        userSheet.setColumnWidth(0, 4000)
-        userSheet.setColumnWidth(1, 8000)
+        val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) ?: filesDir
+        val file = File(dir, fileName)
 
-        val userData = listOf(
-            arrayOf("患者编号", user.patientNumber),
-            arrayOf("昵称", user.nickname),
-            arrayOf("用户名", user.username),
-            arrayOf("注册日期", formatDate(user.registerDate))
-        )
-        for ((rowIdx, rowData) in userData.withIndex()) {
-            val row = userSheet.createRow(rowIdx)
-            for ((colIdx, cellData) in rowData.withIndex()) {
-                val cell = row.createCell(colIdx)
-                cell.setCellValue(cellData)
-                if (colIdx == 0) cell.cellStyle = headerStyle
+        OutputStreamWriter(file.outputStream(), "UTF-8").use { writer ->
+            writer.write("\uFEFF")
+
+            writer.write("患者信息\n")
+            writer.write("患者编号,${user.patientNumber}\n")
+            writer.write("昵称,${user.nickname}\n")
+            writer.write("用户名,${user.username}\n")
+            writer.write("注册日期,${formatDate(user.registerDate)}\n")
+            writer.write("\n")
+
+            writer.write("排尿记录\n")
+            writer.write("序号,记录时间,尿量,漏尿,尿急,尿痛,尿线变细,间断排尿,夜间排尿,备注\n")
+            val volumeTexts = arrayOf("少量", "中量", "大量")
+            for ((idx, record) in urinationRecords.sortedBy { it.recordTime }.withIndex()) {
+                writer.write("${idx + 1},")
+                writer.write("${formatDateTime(record.recordTime)},")
+                writer.write("${volumeTexts[record.volumeLevel]},")
+                writer.write("${if (record.hasLeakage) "是" else "否"},")
+                writer.write("${if (record.hasUrgency) "是" else "否"},")
+                writer.write("${if (record.hasPain) "是" else "否"},")
+                writer.write("${if (record.hasWeakStream) "是" else "否"},")
+                writer.write("${if (record.hasIntermittent) "是" else "否"},")
+                writer.write("${if (record.hasNocturia) "是" else "否"},")
+                writer.write("${escapeCsv(record.note ?: "")}\n")
+            }
+            writer.write("\n")
+
+            writer.write("量表评估\n")
+            writer.write("时间点,评估日期,ICIQ-Q1,ICIQ-Q2,ICIQ-Q3,ICIQ总分,IPSS-Q1,IPSS-Q2,IPSS-Q3,IPSS-Q4,IPSS-Q5,IPSS-Q6,IPSS-Q7,IPSS总分,QoL评分,24h尿垫数,并发症,失访,备注\n")
+            for (record in surveyRecords.sortedBy { it.surveyDate }) {
+                writer.write("${record.timePoint},")
+                writer.write("${formatDate(record.surveyDate)},")
+                writer.write("${record.iciqQ1 ?: ""},")
+                writer.write("${record.iciqQ2 ?: ""},")
+                writer.write("${record.iciqQ3 ?: ""},")
+                writer.write("${record.iciqTotalScore ?: ""},")
+                writer.write("${record.ipssQ1 ?: ""},")
+                writer.write("${record.ipssQ2 ?: ""},")
+                writer.write("${record.ipssQ3 ?: ""},")
+                writer.write("${record.ipssQ4 ?: ""},")
+                writer.write("${record.ipssQ5 ?: ""},")
+                writer.write("${record.ipssQ6 ?: ""},")
+                writer.write("${record.ipssQ7 ?: ""},")
+                writer.write("${record.ipssTotalScore ?: ""},")
+                writer.write("${record.qolScore ?: ""},")
+                writer.write("${record.padCount24h ?: ""},")
+                writer.write("${if (record.hasComplication == true) "是" else "否"},")
+                writer.write("${if (record.isLostFollowUp) "是" else "否"},")
+                writer.write("${escapeCsv(record.note ?: "")}\n")
             }
         }
 
-        // Sheet 2: 排尿记录
-        val urinationSheet = workbook.createSheet("排尿记录")
-        val urinationHeaders = arrayOf(
-            "序号", "记录时间", "尿量", "漏尿", "尿急", "尿痛", "尿线变细", "间断排尿", "夜间排尿", "备注"
-        )
-        val headerRow = urinationSheet.createRow(0)
-        for ((i, header) in urinationHeaders.withIndex()) {
-            val cell = headerRow.createCell(i)
-            cell.setCellValue(header)
-            cell.cellStyle = headerStyle
-            urinationSheet.setColumnWidth(i, 4000)
-        }
-
-        val volumeTexts = arrayOf("少量", "中量", "大量")
-        for ((idx, record) in urinationRecords.sortedBy { it.recordTime }.withIndex()) {
-            val row = urinationSheet.createRow(idx + 1)
-            row.createCell(0).setCellValue((idx + 1).toDouble())
-            row.createCell(1).setCellValue(formatDateTime(record.recordTime))
-            row.createCell(2).setCellValue(volumeTexts[record.volumeLevel])
-            row.createCell(3).setCellValue(if (record.hasLeakage) "是" else "否")
-            row.createCell(4).setCellValue(if (record.hasUrgency) "是" else "否")
-            row.createCell(5).setCellValue(if (record.hasPain) "是" else "否")
-            row.createCell(6).setCellValue(if (record.hasWeakStream) "是" else "否")
-            row.createCell(7).setCellValue(if (record.hasIntermittent) "是" else "否")
-            row.createCell(8).setCellValue(if (record.hasNocturia) "是" else "否")
-            row.createCell(9).setCellValue(record.note ?: "")
-        }
-
-        // Sheet 3: 量表记录
-        val surveySheet = workbook.createSheet("量表评估")
-        val surveyHeaders = arrayOf(
-            "时间点", "评估日期",
-            "ICIQ-Q1", "ICIQ-Q2", "ICIQ-Q3", "ICIQ总分",
-            "IPSS-Q1", "IPSS-Q2", "IPSS-Q3", "IPSS-Q4", "IPSS-Q5", "IPSS-Q6", "IPSS-Q7", "IPSS总分",
-            "QoL评分", "24h尿垫数", "并发症", "失访", "备注"
-        )
-        val surveyHeaderRow = surveySheet.createRow(0)
-        for ((i, header) in surveyHeaders.withIndex()) {
-            val cell = surveyHeaderRow.createCell(i)
-            cell.setCellValue(header)
-            cell.cellStyle = headerStyle
-            surveySheet.setColumnWidth(i, 3500)
-        }
-
-        for ((idx, record) in surveyRecords.sortedBy { it.surveyDate }.withIndex()) {
-            val row = surveySheet.createRow(idx + 1)
-            row.createCell(0).setCellValue(record.timePoint)
-            row.createCell(1).setCellValue(formatDate(record.surveyDate))
-            row.createCell(2).setCellValue(record.iciqQ1?.toDouble() ?: 0.0)
-            row.createCell(3).setCellValue(record.iciqQ2?.toDouble() ?: 0.0)
-            row.createCell(4).setCellValue(record.iciqQ3?.toDouble() ?: 0.0)
-            row.createCell(5).setCellValue(record.iciqTotalScore?.toDouble() ?: 0.0)
-            row.createCell(6).setCellValue(record.ipssQ1?.toDouble() ?: 0.0)
-            row.createCell(7).setCellValue(record.ipssQ2?.toDouble() ?: 0.0)
-            row.createCell(8).setCellValue(record.ipssQ3?.toDouble() ?: 0.0)
-            row.createCell(9).setCellValue(record.ipssQ4?.toDouble() ?: 0.0)
-            row.createCell(10).setCellValue(record.ipssQ5?.toDouble() ?: 0.0)
-            row.createCell(11).setCellValue(record.ipssQ6?.toDouble() ?: 0.0)
-            row.createCell(12).setCellValue(record.ipssQ7?.toDouble() ?: 0.0)
-            row.createCell(13).setCellValue(record.ipssTotalScore?.toDouble() ?: 0.0)
-            row.createCell(14).setCellValue(record.qolScore?.toDouble() ?: 0.0)
-            row.createCell(15).setCellValue(record.padCount24h?.toDouble() ?: 0.0)
-            row.createCell(16).setCellValue(if (record.hasComplication == true) "是" else "否")
-            row.createCell(17).setCellValue(if (record.isLostFollowUp) "是" else "否")
-            row.createCell(18).setCellValue(record.note ?: "")
-        }
-
-        // 保存文件
-        val sdf = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA)
-        val fileName = "康复数据_${user.patientNumber}_${sdf.format(Date())}.xlsx"
-
-        val dir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-            ?: filesDir
-        val file = File(dir, fileName)
-
-        FileOutputStream(file).use {
-            workbook.write(it)
-        }
-        workbook.close()
-
         return file
+    }
+
+    private fun escapeCsv(text: String): String {
+        return if (text.contains(",") || text.contains("\"") || text.contains("\n")) {
+            "\"${text.replace("\"", "\"\"")}\""
+        } else {
+            text
+        }
     }
 
     private fun formatDate(timestamp: Long): String {

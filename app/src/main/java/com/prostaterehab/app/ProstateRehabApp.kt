@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import androidx.multidex.MultiDex
 import com.prostaterehab.app.data.AppDatabase
 import com.prostaterehab.app.data.repository.SurveyRecordRepository
 import com.prostaterehab.app.data.repository.UrinationRecordRepository
@@ -25,7 +24,6 @@ class ProstateRehabApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        MultiDex.install(this)
         val database = AppDatabase.getDatabase(this)
         userRepository = UserRepository(database.userDao())
         urinationRecordRepository = UrinationRecordRepository(database.urinationRecordDao())

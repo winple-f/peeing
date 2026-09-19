@@ -19,7 +19,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        multiDexEnabled = true
     }
 
     buildTypes {
@@ -78,13 +77,6 @@ dependencies {
 
     // Preferences
     implementation("androidx.preference:preference-ktx:1.2.1")
-
-    // Excel导出 (Apache POI)
-    implementation("org.apache.poi:poi:5.2.5")
-    implementation("org.apache.poi:poi-ooxml:5.2.5")
-
-    // Multidex
-    implementation("androidx.multidex:multidex:2.0.1")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
