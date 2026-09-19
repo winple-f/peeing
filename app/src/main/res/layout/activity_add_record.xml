@@ -192,6 +192,63 @@
                     android:textSize="@dimen/text_size_large"
                     android:paddingVertical="@dimen/spacing_small" />
 
+                <LinearLayout
+                    android:id="@+id/slider_leakage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingStart="32dp"
+                    android:paddingBottom="@dimen/spacing_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="严重程度"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/text_secondary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar_leakage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/spacing_small"
+                            android:max="2"
+                            android:progress="0" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_leakage_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1分"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/spacing_small" />
+                    </LinearLayout>
+                </LinearLayout>
+
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cb_urgency"
                     android:layout_width="match_parent"
@@ -199,6 +256,63 @@
                     android:text="@string/has_urgency"
                     android:textSize="@dimen/text_size_large"
                     android:paddingVertical="@dimen/spacing_small" />
+
+                <LinearLayout
+                    android:id="@+id/slider_urgency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingStart="32dp"
+                    android:paddingBottom="@dimen/spacing_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="严重程度"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/text_secondary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar_urgency"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/spacing_small"
+                            android:max="2"
+                            android:progress="0" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_urgency_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1分"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/spacing_small" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cb_pain"
@@ -208,6 +322,63 @@
                     android:textSize="@dimen/text_size_large"
                     android:paddingVertical="@dimen/spacing_small" />
 
+                <LinearLayout
+                    android:id="@+id/slider_pain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingStart="32dp"
+                    android:paddingBottom="@dimen/spacing_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="严重程度"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/text_secondary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar_pain"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/spacing_small"
+                            android:max="2"
+                            android:progress="0" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_pain_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1分"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/spacing_small" />
+                    </LinearLayout>
+                </LinearLayout>
+
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cb_weak_stream"
                     android:layout_width="match_parent"
@@ -215,6 +386,63 @@
                     android:text="@string/has_weak_stream"
                     android:textSize="@dimen/text_size_large"
                     android:paddingVertical="@dimen/spacing_small" />
+
+                <LinearLayout
+                    android:id="@+id/slider_weak_stream"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingStart="32dp"
+                    android:paddingBottom="@dimen/spacing_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="严重程度"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/text_secondary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar_weak_stream"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/spacing_small"
+                            android:max="2"
+                            android:progress="0" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_weak_stream_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1分"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/spacing_small" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cb_intermittent"
@@ -224,6 +452,63 @@
                     android:textSize="@dimen/text_size_large"
                     android:paddingVertical="@dimen/spacing_small" />
 
+                <LinearLayout
+                    android:id="@+id/slider_intermittent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingStart="32dp"
+                    android:paddingBottom="@dimen/spacing_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="严重程度"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/text_secondary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar_intermittent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/spacing_small"
+                            android:max="2"
+                            android:progress="0" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_intermittent_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1分"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/spacing_small" />
+                    </LinearLayout>
+                </LinearLayout>
+
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/cb_nocturia"
                     android:layout_width="match_parent"
@@ -231,6 +516,63 @@
                     android:text="@string/is_nocturia"
                     android:textSize="@dimen/text_size_large"
                     android:paddingVertical="@dimen/spacing_small" />
+
+                <LinearLayout
+                    android:id="@+id/slider_nocturia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingStart="32dp"
+                    android:paddingBottom="@dimen/spacing_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="严重程度"
+                        android:textSize="@dimen/text_size_small"
+                        android:textColor="@color/text_secondary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar_nocturia"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginHorizontal="@dimen/spacing_small"
+                            android:max="2"
+                            android:progress="0" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_nocturia_score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1分"
+                            android:textSize="@dimen/text_size_small"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/spacing_small" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

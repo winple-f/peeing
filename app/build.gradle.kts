@@ -12,8 +12,8 @@ android {
         applicationId = "com.prostaterehab.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "beta-1.0.3"
+        versionCode = 2
+        versionName = "beta-1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
