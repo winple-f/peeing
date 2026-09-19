@@ -6,10 +6,10 @@ App({
   },
 
   onLaunch() {
-    this.autoLogin()
+    this.initLogin()
   },
 
-  autoLogin() {
+  initLogin() {
     const storedId = wx.getStorageSync('patientId')
     const storedUser = wx.getStorageSync('userInfo')
     if (storedId && storedUser) {
@@ -19,30 +19,14 @@ App({
       return
     }
 
-    wx.getUserProfile({
-      desc: '用于完善患者资料',
-      success: (res) => {
-        const userInfo = res.userInfo
-        const patientId = this.generatePatientId()
-        const userId = Date.now()
-        this.globalData.userInfo = { ...userInfo, userId, nickname: userInfo.nickName }
-        this.globalData.patientId = patientId
-        this.globalData.userId = userId
-        wx.setStorageSync('userInfo', this.globalData.userInfo)
-        wx.setStorageSync('patientId', patientId)
-        wx.setStorageSync('userId', userId)
-      },
-      fail: () => {
-        const patientId = this.generatePatientId()
-        const userId = Date.now()
-        this.globalData.userInfo = { userId, nickname: '微信用户' }
-        this.globalData.patientId = patientId
-        this.globalData.userId = userId
-        wx.setStorageSync('userInfo', this.globalData.userInfo)
-        wx.setStorageSync('patientId', patientId)
-        wx.setStorageSync('userId', userId)
-      }
-    })
+    const patientId = this.generatePatientId()
+    const userId = Date.now()
+    this.globalData.userInfo = { userId, nickname: '微信用户' }
+    this.globalData.patientId = patientId
+    this.globalData.userId = userId
+    wx.setStorageSync('userInfo', this.globalData.userInfo)
+    wx.setStorageSync('patientId', patientId)
+    wx.setStorageSync('userId', userId)
   },
 
   getPatientId() {
@@ -75,10 +59,6 @@ App({
   },
 
   checkLogin() {
-    const patientId = this.getPatientId()
-    if (!patientId) {
-      this.autoLogin()
-    }
     return true
   },
 
