@@ -1,4 +1,4 @@
-App({
+﻿App({
   globalData: {
     userInfo: null,
     patientId: null,

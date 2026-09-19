@@ -1,4 +1,4 @@
-<view class="container">
+﻿<view class="container">
   <view class="header">
     <image class="header-logo" src="/assets/icon.png" mode="aspectFit"></image>
     <view class="header-text">

@@ -1,4 +1,4 @@
-<view class="container">
+﻿<view class="container">
   <view wx:if="{{currentStep === 0}}" class="step">
     <text class="step-title">随访时间点</text>
     <text class="step-desc">请选择您当前的随访时间点</text>

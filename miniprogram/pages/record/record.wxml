@@ -1,4 +1,4 @@
-<view class="container">
+﻿<view class="container">
   <text class="section-title">记录时间</text>
   <view class="time-card" bindtap="pickTime">
     <text class="time-text">{{recordTime}}</text>

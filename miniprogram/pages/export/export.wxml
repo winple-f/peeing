@@ -1,4 +1,4 @@
-<view class="container">
+﻿<view class="container">
   <text class="page-title">选择导出范围</text>
 
   <view class="card">

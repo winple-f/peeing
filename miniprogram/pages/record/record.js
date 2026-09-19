@@ -1,4 +1,4 @@
-const app = getApp()
+﻿const app = getApp()
 const storage = require('../../utils/storage.js')
 const util = require('../../utils/util.js')
 

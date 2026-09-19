@@ -1,4 +1,4 @@
-<view class="container">
+﻿<view class="container">
   <view class="tabs">
     <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-tab="0">排尿记录</view>
     <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-tab="1">量表评估</view>
