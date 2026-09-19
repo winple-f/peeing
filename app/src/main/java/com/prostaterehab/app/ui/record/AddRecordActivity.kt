@@ -82,10 +82,6 @@ class AddRecordActivity : AppCompatActivity() {
     }
 
     private fun updateVolumeSelection() {
-        binding.volumeLow.strokeWidth = if (volumeLevel == 0) 4 else 0
-        binding.volumeMedium.strokeWidth = if (volumeLevel == 1) 4 else 0
-        binding.volumeHigh.strokeWidth = if (volumeLevel == 2) 4 else 0
-
         binding.volumeLow.setCardBackgroundColor(
             if (volumeLevel == 0) resources.getColor(com.prostaterehab.app.R.color.primary_light)
             else resources.getColor(com.prostaterehab.app.R.color.white)

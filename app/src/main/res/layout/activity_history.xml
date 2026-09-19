@@ -11,13 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:tabTextSize="18sp"
         app:tabSelectedTextColor="@color/primary"
         app:tabTextColor="@color/text_secondary"
         app:tabIndicatorColor="@color/primary"
-        app:tabIndicatorHeight="3dp"
-        app:tabPaddingTop="@dimen/spacing_normal"
-        app:tabPaddingBottom="@dimen/spacing_normal" />
+        app:tabIndicatorHeight="3dp" />
 
     <FrameLayout
         android:layout_width="match_parent"

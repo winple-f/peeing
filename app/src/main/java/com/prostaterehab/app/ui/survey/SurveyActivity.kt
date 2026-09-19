@@ -99,11 +99,6 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun updateTimePointSelection() {
-        binding.timepointT0.strokeWidth = if (selectedTimePoint == "T0基线") 4 else 0
-        binding.timepointT1.strokeWidth = if (selectedTimePoint == "T1（疗程后1月）") 4 else 0
-        binding.timepointT2.strokeWidth = if (selectedTimePoint == "T2（疗程后3月）") 4 else 0
-        binding.timepointT3.strokeWidth = if (selectedTimePoint == "T3（疗程后6月）") 4 else 0
-
         val selectedColor = resources.getColor(com.prostaterehab.app.R.color.primary_light)
         val normalColor = resources.getColor(com.prostaterehab.app.R.color.white)
 

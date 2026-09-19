@@ -160,13 +160,14 @@ class ExportActivity : AppCompatActivity() {
 
         // 创建工作簿
         val workbook = XSSFWorkbook()
+        val headerFont = workbook.createFont().apply {
+            bold = true
+            fontHeightInPoints = 12
+        }
         val headerStyle = workbook.createCellStyle().apply {
             fillForegroundColor = IndexedColors.LIGHT_BLUE.index
             fillPattern = FillPatternType.SOLID_FOREGROUND
-            font = workbook.createFont().apply {
-                bold = true
-                fontHeightInPoints = 12
-            }
+            setFont(headerFont)
         }
 
         // Sheet 1: 患者信息
