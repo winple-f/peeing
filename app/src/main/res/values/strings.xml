@@ -74,6 +74,8 @@
     <string name="ipss_title">排尿症状（IPSS）</string>
     <string name="qol_title">生活质量（QoL）</string>
     <string name="survey_submitted">问卷已提交</string>
+    <string name="saving">保存中...</string>
+    <string name="save_failed">保存失败，请重试</string>
     <string name="your_score">您的评分</string>
     <string name="total_score">总分：%d 分</string>
 

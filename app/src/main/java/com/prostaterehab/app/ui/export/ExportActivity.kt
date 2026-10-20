@@ -130,7 +130,13 @@ class ExportActivity : AppCompatActivity() {
             app.urinationRecordRepository.getRecordsListByUserId(userId)
         }
 
-        val surveyRecords = app.surveyRecordRepository.getRecordsListByUserId(userId)
+        val allSurveyRecords = app.surveyRecordRepository.getRecordsListByUserId(userId)
+        // 量表记录也按导出范围过滤：只导出该时间段内填写的量表
+        val surveyRecords = if (startTime > 0) {
+            allSurveyRecords.filter { it.surveyDate >= startTime && it.surveyDate < endTime }
+        } else {
+            allSurveyRecords
+        }
 
         val sdf = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA)
         val fileName = "康复数据_${user.patientNumber}_${sdf.format(Date())}.csv"

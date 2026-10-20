@@ -78,6 +78,14 @@ function getSurveyRecords() {
   return getRecords(STORAGE_KEYS.SURVEY_RECORDS)
 }
 
+function getSurveyRecordsByRange(range) {
+  const records = getSurveyRecords()
+  if (range === 0) return records
+  const days = range === 1 ? 30 : 90
+  const startTime = Date.now() - days * 24 * 60 * 60 * 1000
+  return records.filter(r => r.surveyDate >= startTime)
+}
+
 function getAllUrinationRecords() {
   return getRecords(STORAGE_KEYS.URINATION_RECORDS)
 }
@@ -101,6 +109,7 @@ module.exports = {
   getTodayCount,
   addSurveyRecord,
   getSurveyRecords,
+  getSurveyRecordsByRange,
   getAllUrinationRecords,
   getUrinationRecordsByRange
 }

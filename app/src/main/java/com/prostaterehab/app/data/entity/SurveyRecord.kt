@@ -16,10 +16,10 @@ data class SurveyRecord(
 
     // ICIQ-SF 量表（尿失禁）
     val iciqQ1: Int? = null, // 第1题：漏尿次数 0-5
-    val iciqQ2: Int? = null, // 第2题：漏尿量 0-3
+    val iciqQ2: Int? = null, // 第2题：漏尿量 0/2/4/6
     val iciqQ3: Int? = null, // 第3题：对日常生活影响 0-10
     val iciqQ4: String? = null, // 第4题：什么时候漏尿（多选，逗号分隔）
-    val iciqTotalScore: Int? = null, // ICIQ-SF 总分（Q1+Q2+Q3）
+    val iciqTotalScore: Int? = null, // ICIQ-SF 总分（Q1+Q2+Q3，0-21）
 
     // IPSS 量表（前列腺症状）
     val ipssQ1: Int? = null, // 尿不尽感 0-5

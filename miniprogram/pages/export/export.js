@@ -18,7 +18,7 @@ Page({
   handleExport() {
     const range = this.data.exportRange
     const urinationRecords = storage.getUrinationRecordsByRange(range)
-    const surveyRecords = storage.getSurveyRecords()
+    const surveyRecords = storage.getSurveyRecordsByRange(range)
 
     const userInfo = app.globalData.userInfo || {}
     const patientId = app.getPatientId() || ''

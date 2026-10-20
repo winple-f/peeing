@@ -53,7 +53,8 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        if (currentStep > 0) {
+        // 结果页的数据已经保存，返回时直接退出，避免回退后重复提交
+        if (currentStep in 1..3) {
             showStep(currentStep - 1)
             return true
         }
@@ -82,12 +83,16 @@ class SurveyActivity : AppCompatActivity() {
 
         // 下一步/上一步/提交
         binding.btnNext.setOnClickListener {
-            if (currentStep < 4) {
-                if (validateCurrentStep()) {
+            if (currentStep == 4) {
+                // 结果页：返回首页
+                finish()
+            } else if (validateCurrentStep()) {
+                if (currentStep == 3) {
+                    // QoL 是最后一步，提交并保存
+                    submitSurvey()
+                } else {
                     showStep(currentStep + 1)
                 }
-            } else {
-                submitSurvey()
             }
         }
 
@@ -161,7 +166,8 @@ class SurveyActivity : AppCompatActivity() {
                 }
                 // 保存答案
                 iciqQ1 = getRadioGroupScore(binding.rgIciqQ1, intArrayOf(0,1,2,3,4,5))
-                iciqQ2 = getRadioGroupScore(binding.rgIciqQ2, intArrayOf(0,1,2,3))
+                // Q2 漏尿量按官方计分 0/2/4/6，保证 ICIQ-SF 总分范围为 0-21
+                iciqQ2 = getRadioGroupScore(binding.rgIciqQ2, intArrayOf(0,2,4,6))
                 iciqQ3 = getRadioGroupScore(binding.rgIciqQ3, intArrayOf(0,2,4,6,8,10))
                 return true
             }
@@ -225,11 +231,6 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun submitSurvey() {
-        if (currentStep == 4) {
-            finish()
-            return
-        }
-
         val iciqTotal = iciqQ1 + iciqQ2 + iciqQ3
         val ipssTotal = ipssQ1 + ipssQ2 + ipssQ3 + ipssQ4 + ipssQ5 + ipssQ6 + ipssQ7
 
@@ -252,15 +253,33 @@ class SurveyActivity : AppCompatActivity() {
             qolScore = qolScore
         )
 
+        // 防止重复点击造成重复入库
+        binding.btnNext.isEnabled = false
+        binding.btnNext.text = getString(com.prostaterehab.app.R.string.saving)
+
         lifecycleScope.launch {
-            app.surveyRecordRepository.insert(record)
-            runOnUiThread {
-                Toast.makeText(
-                    this@SurveyActivity,
-                    getString(com.prostaterehab.app.R.string.survey_submitted),
-                    Toast.LENGTH_SHORT
-                ).show()
-                showStep(4)
+            try {
+                app.surveyRecordRepository.insert(record)
+                runOnUiThread {
+                    Toast.makeText(
+                        this@SurveyActivity,
+                        getString(com.prostaterehab.app.R.string.survey_submitted),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.btnNext.isEnabled = true
+                    showStep(4)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                runOnUiThread {
+                    binding.btnNext.isEnabled = true
+                    binding.btnNext.text = getString(com.prostaterehab.app.R.string.submit)
+                    Toast.makeText(
+                        this@SurveyActivity,
+                        getString(com.prostaterehab.app.R.string.save_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

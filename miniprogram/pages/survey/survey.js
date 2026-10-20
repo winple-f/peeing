@@ -109,10 +109,14 @@ Page({
   },
 
   submitSurvey() {
-    const iciqTotal = this.data.iciqQ1 + this.data.iciqQ2 + (this.data.iciqQ3 * 2)
-    const iciqScores = [0, 1, 2, 3, 4, 5]
+    // ICIQ-SF 各题计分：Q1 0-5，Q2 0/2/4/6，Q3 0/2/4/6/8/10，总分 0-21
+    const iciqQ1Scores = [0, 1, 2, 3, 4, 5]
+    const iciqQ2Scores = [0, 2, 4, 6]
     const iciqQ3Scores = [0, 2, 4, 6, 8, 10]
-    const realIciqTotal = iciqScores[this.data.iciqQ1] + iciqScores[this.data.iciqQ2] + iciqQ3Scores[this.data.iciqQ3]
+    const iciqQ1Score = iciqQ1Scores[this.data.iciqQ1]
+    const iciqQ2Score = iciqQ2Scores[this.data.iciqQ2]
+    const iciqQ3Score = iciqQ3Scores[this.data.iciqQ3]
+    const iciqTotalScore = iciqQ1Score + iciqQ2Score + iciqQ3Score
 
     let ipssTotal = 0
     for (let i = 0; i < 7; i++) {
@@ -124,10 +128,10 @@ Page({
     const record = {
       timePoint: this.data.selectedTimePoint,
       surveyDate: Date.now(),
-      iciqQ1: this.data.iciqQ1,
-      iciqQ2: this.data.iciqQ2,
-      iciqQ3: this.data.iciqQ3,
-      iciqTotalScore: realIciqTotal,
+      iciqQ1: iciqQ1Score,
+      iciqQ2: iciqQ2Score,
+      iciqQ3: iciqQ3Score,
+      iciqTotalScore,
       ipssQ1: this.data.ipssAnswers[0],
       ipssQ2: this.data.ipssAnswers[1],
       ipssQ3: this.data.ipssAnswers[2],
@@ -143,7 +147,7 @@ Page({
 
     this.setData({
       currentStep: 4,
-      iciqTotalScore: realIciqTotal,
+      iciqTotalScore,
       ipssTotalScore: ipssTotal,
       ipssSeverity: severity
     })
